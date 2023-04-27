@@ -30,7 +30,7 @@ build/
 !**/src/test/**/build/
 
 ### Properties ###
-*/aplication.properties
+/src/main/resources/application.properties
 
 ### VS Code ###
 .vscode/
