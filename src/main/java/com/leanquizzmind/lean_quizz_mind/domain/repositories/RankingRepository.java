@@ -3,13 +3,14 @@ package com.leanquizzmind.lean_quizz_mind.domain.repositories;
 import com.leanquizzmind.lean_quizz_mind.domain.models.Ranking;
 
 import java.util.List;
+import java.util.UUID;
 
 public interface RankingRepository {
 
-    List<Ranking> getAllBy(long quizzId);
+    public List<Ranking> getAllBy(UUID quizzId);
 
-    int getPositionBy(String nickname);
+    public int getPositionBy(String nickname);
 
-    void save(Ranking ranking);
+    public void save(Ranking ranking);
 
 }
