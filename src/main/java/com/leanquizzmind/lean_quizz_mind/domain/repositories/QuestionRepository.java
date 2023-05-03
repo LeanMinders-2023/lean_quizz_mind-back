@@ -9,4 +9,6 @@ public interface QuestionRepository {
 
     public List<Question> getAllBy(UUID quizzId);
 
+    public void save(Question question);
+
 }

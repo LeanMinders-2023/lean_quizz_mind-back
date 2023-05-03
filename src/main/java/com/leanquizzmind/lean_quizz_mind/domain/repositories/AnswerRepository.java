@@ -9,4 +9,6 @@ public interface AnswerRepository {
 
     public List<Answer> getAllBy(UUID questionId);
 
+    public void save(Answer answer);
+
 }

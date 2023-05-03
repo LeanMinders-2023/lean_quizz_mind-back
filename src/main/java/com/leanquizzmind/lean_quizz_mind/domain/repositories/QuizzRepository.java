@@ -13,4 +13,6 @@ public interface QuizzRepository {
 
     public List<Quizz> getAllByDifficulty(Difficulty difficulty);
 
+    public void save(Quizz quizz);
+
 }

@@ -8,4 +8,6 @@ public interface CategoryRepository {
 
     public List<Category> getAll();
 
+    public void save(Category category);
+
 }
