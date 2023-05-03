@@ -9,6 +9,8 @@ public interface RankingRepository {
 
     public List<Ranking> getAllBy(UUID quizzId);
 
+// UUID quizzId to get position
+
     public int getPositionBy(String nickname);
 
     public void save(Ranking ranking);
