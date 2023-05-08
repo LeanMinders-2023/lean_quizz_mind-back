@@ -2,27 +2,25 @@ package com.leanquizzmind.lean_quizz_mind.domain.models;
 
 import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
 
+import java.util.List;
 import java.util.UUID;
 
 public class Quizz {
 
-    private UUID quizzId = UUID.randomUUID();
+    private UUID quizzId;
     private Text explication;
     private Difficulty difficulty;
-    private UUID questionId;
-    private UUID categoryId;
-    private UUID rankingId;
+    private List<Question> questions;
+    private Ranking ranking;
 
     public Quizz() {}
 
-    public Quizz(UUID quizzId, Text explication, Difficulty difficulty,
-                 UUID questionId, UUID categoryId, UUID rankingId) {
+    public Quizz(UUID quizzId, Text explication, Difficulty difficulty, List<Question> questions, Ranking ranking) {
         this.quizzId = quizzId;
         this.explication = explication;
         this.difficulty = difficulty;
-        this.questionId = questionId;
-        this.categoryId = categoryId;
-        this.rankingId = rankingId;
+        this.questions = questions;
+        this.ranking = ranking;
     }
 
     public UUID getQuizzId() {
@@ -49,27 +47,23 @@ public class Quizz {
         this.difficulty = difficulty;
     }
 
-    public UUID getQuestionId() {
-        return questionId;
+    public List<Question> getQuestions() {
+        return questions;
     }
 
-    public void setQuestionId(UUID questionId) {
-        this.questionId = questionId;
+    public void setQuestions(List<Question> questions) {
+        this.questions = questions;
     }
 
-    public UUID getCategoryId() {
-        return categoryId;
+    public Ranking getRanking() {
+        return ranking;
     }
 
-    public void setCategoryId(UUID categoryId) {
-        this.categoryId = categoryId;
+    public void setRanking(Ranking ranking) {
+        this.ranking = ranking;
     }
 
-    public UUID getRankingId() {
-        return rankingId;
-    }
-
-    public void setRankingId(UUID rankingId) {
-        this.rankingId = rankingId;
+    public void insertId() {
+        this.quizzId = UUID.randomUUID();
     }
 }

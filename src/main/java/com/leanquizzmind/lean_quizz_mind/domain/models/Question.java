@@ -2,22 +2,22 @@ package com.leanquizzmind.lean_quizz_mind.domain.models;
 
 import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 public class Question {
 
-    private UUID questionId = UUID.randomUUID();
+    private UUID questionId;
     private Text question;
-    private UUID answerId;
-    private UUID quizzId;
+    private List<Answer> possibleAnswers = new ArrayList<>();
 
     public Question() {}
 
-    public Question(UUID questionId, Text question, UUID answerId, UUID quizzId) {
+    public Question(UUID questionId, Text question, List<Answer> possibleAnswers) {
         this.questionId = questionId;
         this.question = question;
-        this.answerId = answerId;
-        this.quizzId = quizzId;
+        this.possibleAnswers = possibleAnswers;
     }
 
     public UUID getQuestionId() {
@@ -36,19 +36,15 @@ public class Question {
         this.question = question;
     }
 
-    public UUID getAnswerId() {
-        return answerId;
+    public List<Answer> getPossibleAnswers() {
+        return possibleAnswers;
     }
 
-    public void setAnswerId(UUID answerId) {
-        this.answerId = answerId;
+    public void setPossibleAnswers(List<Answer> possibleAnswers) {
+        this.possibleAnswers = possibleAnswers;
     }
 
-    public UUID getQuizzId() {
-        return quizzId;
-    }
-
-    public void setQuizzId(UUID quizzId) {
-        this.quizzId = quizzId;
+    public void insertId() {
+        this.questionId = UUID.randomUUID();
     }
 }

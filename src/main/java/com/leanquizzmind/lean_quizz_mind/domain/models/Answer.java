@@ -9,21 +9,12 @@ public class Answer {
     private UUID answerId;
     private Text answer;
     private boolean correctAnswer;
-    private UUID questionId;
 
     // Clase records java
-    private Answer(UUID answerId, Text answer, boolean correctAnswer, UUID questionId) {
+    private Answer(UUID answerId, Text answer, boolean correctAnswer) {
         this.answerId = answerId;
         this.answer = answer;
         this.correctAnswer = correctAnswer;
-        this.questionId = questionId;
-    }
-
-    public Answer(UUID questionId, Text answer, boolean correctAnswer) {
-        this.answerId = questionId;
-        this.answer = answer;
-        this.correctAnswer = correctAnswer;
-        this.questionId = questionId;
     }
 
     public UUID getAnswerId() {
@@ -50,11 +41,7 @@ public class Answer {
         this.correctAnswer = correctAnswer;
     }
 
-    public UUID getQuestionId() {
-        return questionId;
-    }
-
-    public void setQuestionId(UUID questionId) {
-        this.questionId = questionId;
+    public void insertId() {
+        this.answerId = UUID.randomUUID();
     }
 }

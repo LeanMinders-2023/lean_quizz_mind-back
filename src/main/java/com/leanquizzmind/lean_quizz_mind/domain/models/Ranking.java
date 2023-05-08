@@ -7,7 +7,7 @@ import java.util.UUID;
 
 public class Ranking {
 
-    private UUID rankingId = UUID.randomUUID();
+    private UUID rankingId;
     private Text nickname;
     private float points;
     private Time time;
@@ -51,5 +51,9 @@ public class Ranking {
 
     public void setTime(Time time) {
         this.time = time;
+    }
+
+    public void insertId() {
+        this.rankingId = UUID.randomUUID();
     }
 }
