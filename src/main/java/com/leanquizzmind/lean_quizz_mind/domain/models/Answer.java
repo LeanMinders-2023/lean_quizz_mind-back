@@ -9,6 +9,7 @@ public class Answer {
     private boolean correctAnswer;
     private UUID questionId;
 
+    // Clase records java
     private Answer(UUID answerId, String answer, boolean correctAnswer, UUID questionId) {
         this.answerId = answerId;
         this.answer = answer;
@@ -16,8 +17,8 @@ public class Answer {
         this.questionId = questionId;
     }
 
-    public Answer(String answer, boolean correctAnswer, UUID questionId) {
-        this.answerId = UUID.randomUUID();
+    public Answer(UUID questionId, String answer, boolean correctAnswer) {
+        this.answerId = questionId;
         this.answer = answer;
         this.correctAnswer = correctAnswer;
         this.questionId = questionId;
@@ -39,7 +40,7 @@ public class Answer {
         this.answer = answer;
     }
 
-    public boolean isCorrectAnswer() {
+    public boolean getCorrectAnswer() {
         return correctAnswer;
     }
 
