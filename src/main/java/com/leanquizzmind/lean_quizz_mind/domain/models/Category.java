@@ -1,15 +1,17 @@
 package com.leanquizzmind.lean_quizz_mind.domain.models;
 
+import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
+
 import java.util.UUID;
 
 public class Category {
 
     private UUID categoryId = UUID.randomUUID();
-    private String category;
+    private Text category;
 
     public Category() {}
 
-    public Category(UUID categoryId, String category) {
+    public Category(UUID categoryId, Text category) {
         this.categoryId = categoryId;
         this.category = category;
     }
@@ -22,11 +24,11 @@ public class Category {
         this.categoryId = categoryId;
     }
 
-    public String getCategory() {
+    public Text getCategory() {
         return category;
     }
 
-    public void setCategory(String category) {
+    public void setCategory(Text category) {
         this.category = category;
     }
 }

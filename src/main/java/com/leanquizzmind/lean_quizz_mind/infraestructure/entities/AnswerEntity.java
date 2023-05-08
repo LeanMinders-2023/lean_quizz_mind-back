@@ -1,6 +1,7 @@
 package com.leanquizzmind.lean_quizz_mind.infraestructure.entities;
 
 import com.leanquizzmind.lean_quizz_mind.domain.models.Answer;
+import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
@@ -56,7 +57,7 @@ public class AnswerEntity {
 
         return new AnswerEntity(
                 answer.getAnswerId(),
-                answer.getAnswer(),
+                answer.getAnswer().getText(),
                 answer.getCorrectAnswer()
         );
 
@@ -66,7 +67,7 @@ public class AnswerEntity {
 
         return new Answer(
                 this.getAnswerId(),
-                this.getAnswer(),
+                Text.createText(this.getAnswer()),
                 this.getCorrectAnswer()
         );
 

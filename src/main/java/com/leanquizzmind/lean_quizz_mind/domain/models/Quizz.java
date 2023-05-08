@@ -1,11 +1,13 @@
 package com.leanquizzmind.lean_quizz_mind.domain.models;
 
+import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
+
 import java.util.UUID;
 
 public class Quizz {
 
     private UUID quizzId = UUID.randomUUID();
-    private String explication;
+    private Text explication;
     private Difficulty difficulty;
     private UUID questionId;
     private UUID categoryId;
@@ -13,7 +15,7 @@ public class Quizz {
 
     public Quizz() {}
 
-    public Quizz(UUID quizzId, String explication, Difficulty difficulty,
+    public Quizz(UUID quizzId, Text explication, Difficulty difficulty,
                  UUID questionId, UUID categoryId, UUID rankingId) {
         this.quizzId = quizzId;
         this.explication = explication;
@@ -31,11 +33,11 @@ public class Quizz {
         this.quizzId = quizzId;
     }
 
-    public String getExplication() {
+    public Text getExplication() {
         return explication;
     }
 
-    public void setExplication(String explication) {
+    public void setExplication(Text explication) {
         this.explication = explication;
     }
 

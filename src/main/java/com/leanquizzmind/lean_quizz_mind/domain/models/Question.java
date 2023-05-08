@@ -1,17 +1,19 @@
 package com.leanquizzmind.lean_quizz_mind.domain.models;
 
+import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
+
 import java.util.UUID;
 
 public class Question {
 
     private UUID questionId = UUID.randomUUID();
-    private String question;
+    private Text question;
     private UUID answerId;
     private UUID quizzId;
 
     public Question() {}
 
-    public Question(UUID questionId, String question, UUID answerId, UUID quizzId) {
+    public Question(UUID questionId, Text question, UUID answerId, UUID quizzId) {
         this.questionId = questionId;
         this.question = question;
         this.answerId = answerId;
@@ -26,11 +28,11 @@ public class Question {
         this.questionId = questionId;
     }
 
-    public String getQuestion() {
+    public Text getQuestion() {
         return question;
     }
 
-    public void setQuestion(String question) {
+    public void setQuestion(Text question) {
         this.question = question;
     }
 

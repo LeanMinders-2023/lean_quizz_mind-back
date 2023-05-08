@@ -1,23 +1,25 @@
 package com.leanquizzmind.lean_quizz_mind.domain.models;
 
+import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
+
 import java.util.UUID;
 
 public class Answer {
 
     private UUID answerId;
-    private String answer;
+    private Text answer;
     private boolean correctAnswer;
     private UUID questionId;
 
     // Clase records java
-    private Answer(UUID answerId, String answer, boolean correctAnswer, UUID questionId) {
+    private Answer(UUID answerId, Text answer, boolean correctAnswer, UUID questionId) {
         this.answerId = answerId;
         this.answer = answer;
         this.correctAnswer = correctAnswer;
         this.questionId = questionId;
     }
 
-    public Answer(UUID questionId, String answer, boolean correctAnswer) {
+    public Answer(UUID questionId, Text answer, boolean correctAnswer) {
         this.answerId = questionId;
         this.answer = answer;
         this.correctAnswer = correctAnswer;
@@ -32,11 +34,11 @@ public class Answer {
         this.answerId = answerId;
     }
 
-    public String getAnswer() {
+    public Text getAnswer() {
         return answer;
     }
 
-    public void setAnswer(String answer) {
+    public void setAnswer(Text answer) {
         this.answer = answer;
     }
 
