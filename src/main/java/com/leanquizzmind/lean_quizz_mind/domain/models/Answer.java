@@ -11,7 +11,7 @@ public class Answer {
     private boolean correctAnswer;
 
     // Clase records java
-    private Answer(UUID answerId, Text answer, boolean correctAnswer) {
+    public Answer(UUID answerId, Text answer, boolean correctAnswer) {
         this.answerId = answerId;
         this.answer = answer;
         this.correctAnswer = correctAnswer;
