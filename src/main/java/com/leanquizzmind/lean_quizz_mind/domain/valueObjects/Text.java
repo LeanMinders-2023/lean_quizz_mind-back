@@ -10,7 +10,9 @@ public class Text {
 
     public static Text createText(String text) {
 
-        if (text.isBlank()) {
+        boolean textIsEmpty = text.isBlank();
+
+        if (textIsEmpty) {
             throw new IllegalArgumentException("The text cannot be empty");
         }
 
