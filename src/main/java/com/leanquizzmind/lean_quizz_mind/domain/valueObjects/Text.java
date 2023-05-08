@@ -10,7 +10,7 @@ public class Text {
 
     public static Text createText(String text) {
 
-        throw new Error("Not implemented yet");
+        throw new IllegalArgumentException("The text cannot be empty");
 
     }
 
