@@ -14,7 +14,8 @@ import static org.mockito.Mockito.*;
 class AnswerServiceTest {
 
     /*
-    *   save(Answer answer)      ->      save into the database
+    *   save(Answer answer)         ->      save into the database
+    *   save(Answer answerExist)    ->      dont save into the database
     */
 
     private final AnswerRepository MY_FAKE_ANSWER_REPOSITORY = mock(PostgreSQLAnswerRepositoryAdapter.class);
@@ -30,6 +31,18 @@ class AnswerServiceTest {
 
         verify(MY_FAKE_ANSWER_REPOSITORY).save(answerArgument.capture());
         assertEquals(answer, answerArgument.getValue());
+    }
+
+    @Test
+    void should_not_save_answer_if_exist() {
+        Text answerText = Text.createText("answer example");
+        Answer answer = new Answer(answerText, false);
+
+        answer.insertId();
+        ANSWER_SERVICE.save(answer);
+        when(MY_FAKE_ANSWER_REPOSITORY.answerExist(answer.getAnswerId())).thenReturn(true);
+
+        verify(MY_FAKE_ANSWER_REPOSITORY, never()).save(answer);
     }
 
 }

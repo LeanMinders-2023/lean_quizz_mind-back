@@ -22,6 +22,11 @@ public class PostgreSQLAnswerRepositoryAdapter implements AnswerRepository {
         throw new Error("Not implemented yet");
     }
 
+    public boolean answerExist(UUID answerId) {
+
+        throw new Error("Not implemented yet");
+    }
+
     public List<Answer> getAllBy(UUID quizzId) {
 
         throw new Error("Not implemented yet");

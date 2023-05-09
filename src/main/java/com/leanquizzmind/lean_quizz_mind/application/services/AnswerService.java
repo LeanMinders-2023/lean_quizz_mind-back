@@ -28,4 +28,9 @@ public class AnswerService {
         answerRepository.save(answer);
     }
 
+    public boolean answerExist(UUID answerId) {
+
+        throw new Error("Not implemented yet");
+    }
+
 }
