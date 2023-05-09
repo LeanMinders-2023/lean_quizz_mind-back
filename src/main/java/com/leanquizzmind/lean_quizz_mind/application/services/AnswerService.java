@@ -24,11 +24,16 @@ public class AnswerService {
 
     public void save(Answer answer) {
 
-        boolean answerNotExist = answerExist(answer.getAnswerId());
-
-        if (answerNotExist) {
+        if (answer.getAnswerId() == null) {
             answer.insertId();
             answerRepository.save(answer);
+        } else {
+            boolean answerNotExist = answerExist(answer.getAnswerId());
+
+            if (answerNotExist) {
+                answer.insertId();
+                answerRepository.save(answer);
+            }
         }
 
     }

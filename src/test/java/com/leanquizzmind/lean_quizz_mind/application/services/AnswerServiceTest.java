@@ -27,6 +27,7 @@ class AnswerServiceTest {
         ArgumentCaptor<Answer> answerArgument = ArgumentCaptor.forClass(Answer.class);
 
         ANSWER_SERVICE.save(answer);
+        when(MY_FAKE_ANSWER_REPOSITORY.answerExist(answer.getAnswerId())).thenReturn(false);
 
         verify(MY_FAKE_ANSWER_REPOSITORY).save(answerArgument.capture());
         assertEquals(answer, answerArgument.getValue());
