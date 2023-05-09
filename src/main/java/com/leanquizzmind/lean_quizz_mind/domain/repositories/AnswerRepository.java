@@ -7,8 +7,6 @@ import java.util.UUID;
 
 public interface AnswerRepository {
 
-    public List<Answer> getAllBy(UUID questionId);
-
     public void save(Answer answer);
 
     public boolean answerExist(UUID answerId);
