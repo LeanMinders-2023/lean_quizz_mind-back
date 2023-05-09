@@ -14,23 +14,17 @@ public class AnswerService {
 
     public AnswerService(AnswerRepository answerRepository) {
 
-        throw new Error("Not implemented yet");
-
-        // this.answerRepository = answerRepository;
+        this.answerRepository = answerRepository;
     }
 
     public List<Answer> getAllBy(UUID quizzId) {
 
         throw new Error("Not implemented yet");
-
-        // return answerRepository.getAllBy(quizzId);
     }
 
     public void save(Answer answer) {
 
         throw new Error("Not implemented yet");
-
-        // answerRepository.save(answer);
     }
 
 }

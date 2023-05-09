@@ -23,22 +23,12 @@ public class AnswerController {
 
         throw new Error("Not implemented yet");
 
-        /*
-        /*  List<Answer> answerList = answerService.getAllBy(questionId);
-        /*  return ResponseEntity.ok(answerList);
-        */
-
     }
 
     @PostMapping("/answers")
     public ResponseEntity<String> save(@RequestBody Answer answer) {
 
         throw new Error("Not implemented yet");
-
-        /*
-        /*  answerService.save(answer);
-        /*  return ResponseEntity.ok("Not implemented yet");
-        */
     }
 
 }

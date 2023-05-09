@@ -10,4 +10,5 @@ import java.util.UUID;
 @Repository
 public interface JpaAnswerRepository extends JpaRepository<AnswerEntity, UUID> {
     List<AnswerEntity> findAllById(UUID quizzId);
+
 }
