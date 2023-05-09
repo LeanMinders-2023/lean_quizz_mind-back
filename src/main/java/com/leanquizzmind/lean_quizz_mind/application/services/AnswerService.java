@@ -24,18 +24,25 @@ public class AnswerService {
 
     public void save(Answer answer) {
 
-        boolean answerDontHaveId = answer.getAnswerId() == null;
+        boolean answerNotHaveId = answer.getAnswerId() == null;
 
-        if (answerDontHaveId) {
+        if (answerNotHaveId) {
             answer.insertId();
             answerRepository.save(answer);
         } else {
-            boolean answerNotExist = answerExist(answer.getAnswerId());
+
+            /*
+             * answerExist -> true  => [ answer existe por lo que no se añade ]
+             * answerExist -> false  => [ answer no existe por lo que se añade ]
+             * */
+
+            boolean answerNotExist = !answerExist(answer.getAnswerId());
 
             if (answerNotExist) {
                 answer.insertId();
                 answerRepository.save(answer);
             }
+
         }
 
     }
