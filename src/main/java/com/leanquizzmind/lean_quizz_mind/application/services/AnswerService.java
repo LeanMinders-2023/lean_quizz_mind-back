@@ -24,7 +24,9 @@ public class AnswerService {
 
     public void save(Answer answer) {
 
-        if (answer.getAnswerId() == null) {
+        boolean answerDontHaveId = answer.getAnswerId() == null;
+
+        if (answerDontHaveId) {
             answer.insertId();
             answerRepository.save(answer);
         } else {
