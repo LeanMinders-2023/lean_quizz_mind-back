@@ -24,7 +24,8 @@ public class AnswerService {
 
     public void save(Answer answer) {
 
-        throw new Error("Not implemented yet");
+        answer.insertId();
+        answerRepository.save(answer);
     }
 
 }
