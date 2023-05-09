@@ -7,8 +7,6 @@ import com.leanquizzmind.lean_quizz_mind.infraestructure.repositories.PostgreSQL
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 import static org.junit.jupiter.api.Assertions.*;
-
-
 import static org.mockito.Mockito.*;
 
 class AnswerServiceTest {
@@ -16,6 +14,7 @@ class AnswerServiceTest {
     /*
     *   save(Answer answer)         ->      save into the database
     *   save(Answer answerExist)    ->      dont save into the database
+    *
     */
 
     private final AnswerRepository MY_FAKE_ANSWER_REPOSITORY = mock(PostgreSQLAnswerRepositoryAdapter.class);

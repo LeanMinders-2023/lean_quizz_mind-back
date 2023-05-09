@@ -24,13 +24,18 @@ public class AnswerService {
 
     public void save(Answer answer) {
 
-        answer.insertId();
-        answerRepository.save(answer);
+        boolean answerNotExist = answerExist(answer.getAnswerId());
+
+        if (answerNotExist) {
+            answer.insertId();
+            answerRepository.save(answer);
+        }
+
     }
 
-    public boolean answerExist(UUID answerId) {
+    private boolean answerExist(UUID answerId) {
 
-        throw new Error("Not implemented yet");
+        return answerRepository.answerExist(answerId);
     }
 
 }
