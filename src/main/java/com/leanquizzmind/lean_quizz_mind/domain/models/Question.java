@@ -10,10 +10,15 @@ public class Question {
 
     private UUID questionId;
     private Text question;
+
+    // TODO: Value object de la lista de answers para hacer las comprobaciones.
     private List<Answer> possibleAnswers = new ArrayList<>();
 
     public Question() {}
-
+    public Question(Text question, List<Answer> possibleAnswers) {
+        this.question = question;
+        this.possibleAnswers = possibleAnswers;
+    }
     public Question(UUID questionId, Text question, List<Answer> possibleAnswers) {
         this.questionId = questionId;
         this.question = question;
