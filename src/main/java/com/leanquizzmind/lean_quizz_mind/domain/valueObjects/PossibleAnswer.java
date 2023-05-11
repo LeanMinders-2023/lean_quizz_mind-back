@@ -15,7 +15,7 @@ public class PossibleAnswer {
 
     public static PossibleAnswer createPossibleAnswer(List<Answer> possibleAnswers) {
 
-        throw new Error("Not implemented yet");
+        return new PossibleAnswer(possibleAnswers);
     }
 
     public List<Answer> getPossibleAnswers() {
