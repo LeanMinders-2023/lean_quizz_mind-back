@@ -29,4 +29,11 @@ public class PossibleAnswerTest {
         assertEquals(possibleAnswers.getPossibleAnswers(), answerList);
     }
 
+    @Test
+    void should_pass_empty_list_error_response() {
+        List<Answer> answerList = List.of();
+
+        assertThrows(NullPointerException.class, () -> PossibleAnswer.createPossibleAnswer(answerList));
+    }
+
 }
