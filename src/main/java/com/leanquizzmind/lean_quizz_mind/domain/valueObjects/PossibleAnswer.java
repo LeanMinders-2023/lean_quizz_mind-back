@@ -15,6 +15,8 @@ public class PossibleAnswer {
 
     public static PossibleAnswer createPossibleAnswer(List<Answer> possibleAnswers) {
 
+        if (possibleAnswers.isEmpty()) { throw new NullPointerException("The possibleAnswer List cannot be empty"); }
+
         return new PossibleAnswer(possibleAnswers);
     }
 
