@@ -5,9 +5,6 @@ import com.leanquizzmind.lean_quizz_mind.domain.repositories.AnswerRepository;
 import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
 import com.leanquizzmind.lean_quizz_mind.infraestructure.repositories.PostgreSQLAnswerRepositoryAdapter;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
 class AnswerServiceTest {
@@ -15,31 +12,27 @@ class AnswerServiceTest {
     /*
      *   save(Answer answer)         ->      save into the database
      *   save(Answer answerExist)    ->      dont save into the database
-     *
-     */
+    */
 
     private final AnswerRepository MY_FAKE_ANSWER_REPOSITORY = mock(PostgreSQLAnswerRepositoryAdapter.class);
     private final AnswerService ANSWER_SERVICE = new AnswerService(MY_FAKE_ANSWER_REPOSITORY);
 
     @Test
     void should_save_a_new_answer() {
-        Text answerText = Text.createText("answer example");
+        Text answerText = Text.createText("example answer text");
         Answer answer = new Answer(answerText, false);
-        ArgumentCaptor<Answer> answerArgument = ArgumentCaptor.forClass(Answer.class);
 
         ANSWER_SERVICE.save(answer);
 
-        verify(MY_FAKE_ANSWER_REPOSITORY).save(answerArgument.capture());
-        assertEquals(answer, answerArgument.getValue());
+        verify(MY_FAKE_ANSWER_REPOSITORY).save(answer);
     }
 
     @Test
     void should_not_save_answer_if_exist() {
-        Text answerText = Text.createText("answer example");
+        Text answerText = Text.createText("example answer text");
         Answer answer = new Answer(answerText, false);
 
-        answer.insertId();
-        when(MY_FAKE_ANSWER_REPOSITORY.answerExist(answer.getAnswerId())).thenReturn(true);
+        when(MY_FAKE_ANSWER_REPOSITORY.answerExist(answer)).thenReturn(true);
         ANSWER_SERVICE.save(answer);
 
         verify(MY_FAKE_ANSWER_REPOSITORY, never()).save(answer);

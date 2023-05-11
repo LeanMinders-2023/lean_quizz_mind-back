@@ -4,9 +4,6 @@ import com.leanquizzmind.lean_quizz_mind.domain.models.Answer;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.AnswerRepository;
 import org.springframework.stereotype.Component;
 
-import java.util.List;
-import java.util.UUID;
-
 @Component
 public class AnswerService {
 
@@ -17,39 +14,13 @@ public class AnswerService {
         this.answerRepository = answerRepository;
     }
 
-    public List<Answer> getAllBy(UUID quizzId) {
-
-        throw new Error("Not implemented yet");
-    }
-
     public void save(Answer answer) {
+        answer.insertId();
+        boolean answerNotExist = !answerRepository.answerExist(answer);
 
-        boolean answerNotHaveId = answer.getAnswerId() == null;
-
-        if (answerNotHaveId) {
-            answer.insertId();
+        if (answerNotExist) {
             answerRepository.save(answer);
-        } else {
-
-            /*
-             * answerExist -> true  => [ answer existe por lo que no se añade ]
-             * answerExist -> false  => [ answer no existe por lo que se añade ]
-             * */
-
-            boolean answerNotExist = !answerExist(answer.getAnswerId());
-
-            if (answerNotExist) {
-                answer.insertId();
-                answerRepository.save(answer);
-            }
-
         }
-
-    }
-
-    private boolean answerExist(UUID answerId) {
-
-        return answerRepository.answerExist(answerId);
     }
 
 }
