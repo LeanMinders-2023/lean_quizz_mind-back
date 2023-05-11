@@ -11,7 +11,11 @@ public class QuestionService {
     }
 
     public void save(Question question) {
-        this.questionRepository.save(question);
+        question.insertId();
+        boolean questionNotExist = !this.questionRepository.questionExist(question);
+        if (questionNotExist) {
+            this.questionRepository.save(question);
+        }
     }
 
 }
