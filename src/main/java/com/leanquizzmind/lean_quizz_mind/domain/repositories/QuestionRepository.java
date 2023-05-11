@@ -8,10 +8,10 @@ import java.util.UUID;
 
 public interface QuestionRepository {
 
-    public void save(Question question);
+    void save(Question question);
 
-    public List<Answer> getAll(UUID questionId);
+    List<Answer> getAll(UUID questionId);
 
-    public boolean questionExist(UUID questionId);
+    boolean questionExist(Question question);
 
 }

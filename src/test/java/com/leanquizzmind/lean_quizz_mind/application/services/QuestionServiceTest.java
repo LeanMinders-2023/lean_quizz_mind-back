@@ -27,7 +27,7 @@ class QuestionServiceTest {
         Text answerText = Text.createText("My new answer");
         Answer firstAnswer = new Answer(answerText, true);
         Answer secondAnswer = new Answer(answerText, false);
-        List<Answer> possibleAnswers = List.of(firstAnswer, secondAnswer);
+        possibleAnswers = List.of(firstAnswer, secondAnswer);
     }
     @Test
     void should_save_a_new_question() {
@@ -37,6 +37,16 @@ class QuestionServiceTest {
         QUESTION_SERVICE.save(question);
 
         verify(MY_FAKE_QUESTION_REPOSITORY).save(question);
+    }
+    @Test
+    void should_not_save_an_existent_question() {
+        Text questionText = Text.createText("My new question");
+        Question question = new Question(questionText, possibleAnswers);
+
+        when(MY_FAKE_QUESTION_REPOSITORY.questionExist(question)).thenReturn(true);
+        QUESTION_SERVICE.save(question);
+
+        verify(MY_FAKE_QUESTION_REPOSITORY, never()).save(question);
     }
 
 
