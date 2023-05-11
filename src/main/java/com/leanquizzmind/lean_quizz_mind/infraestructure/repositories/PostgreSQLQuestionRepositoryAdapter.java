@@ -20,7 +20,7 @@ public class PostgreSQLQuestionRepositoryAdapter implements QuestionRepository {
     }
 
     @Override
-    public boolean questionExist(Question questionId) {
+    public boolean questionExists(Question questionId) {
         throw new Error("Not implemented yet");
     }
 }

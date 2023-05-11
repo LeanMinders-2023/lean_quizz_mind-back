@@ -9,6 +9,6 @@ public interface AnswerRepository {
 
     public void save(Answer answer);
 
-    public boolean answerExist(Answer answer);
+    public boolean answersExist(Answer answer);
 
 }

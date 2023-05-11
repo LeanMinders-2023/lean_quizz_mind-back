@@ -17,7 +17,7 @@ public class PostgreSQLAnswerRepositoryAdapter implements AnswerRepository {
         throw new Error("Not implemented yet");
     }
 
-    public boolean answerExist(Answer answer) {
+    public boolean answersExist(Answer answer) {
 
         throw new Error("Not implemented yet");
     }

@@ -12,6 +12,6 @@ public interface QuestionRepository {
 
     List<Answer> getAll(UUID questionId);
 
-    boolean questionExist(Question question);
+    boolean questionExists(Question question);
 
 }

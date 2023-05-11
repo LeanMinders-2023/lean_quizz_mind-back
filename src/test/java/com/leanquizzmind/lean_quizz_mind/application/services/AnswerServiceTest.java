@@ -11,7 +11,8 @@ class AnswerServiceTest {
 
     /*
      *   save(Answer answer)         ->      save into the database
-     *   save(Answer answerExist)    ->      dont save into the database
+     *   save(Answer answerExist)    ->      don`t save into the database
+     *   if answer text exists       ->      don`t save into the database
     */
 
     private final AnswerRepository MY_FAKE_ANSWER_REPOSITORY = mock(PostgreSQLAnswerRepositoryAdapter.class);
@@ -28,11 +29,11 @@ class AnswerServiceTest {
     }
 
     @Test
-    void should_not_save_answer_if_exist() {
+    void should_not_save_answer_if_exists() {
         Text answerText = Text.createText("example answer text");
         Answer answer = new Answer(answerText, false);
 
-        when(MY_FAKE_ANSWER_REPOSITORY.answerExist(answer)).thenReturn(true);
+        when(MY_FAKE_ANSWER_REPOSITORY.answersExist(answer)).thenReturn(true);
         ANSWER_SERVICE.save(answer);
 
         verify(MY_FAKE_ANSWER_REPOSITORY, never()).save(answer);

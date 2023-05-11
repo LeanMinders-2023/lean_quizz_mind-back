@@ -16,7 +16,7 @@ public class AnswerService {
 
     public void save(Answer answer) {
         answer.insertId();
-        boolean answerNotExist = !answerRepository.answerExist(answer);
+        boolean answerNotExist = !answerRepository.answersExist(answer);
 
         if (answerNotExist) {
             answerRepository.save(answer);

@@ -41,7 +41,7 @@ class QuestionServiceTest {
         Text questionText = Text.createText("My new question");
         Question question = new Question(questionText, possibleAnswers);
 
-        when(MY_FAKE_QUESTION_REPOSITORY.questionExist(question)).thenReturn(true);
+        when(MY_FAKE_QUESTION_REPOSITORY.questionExists(question)).thenReturn(true);
         QUESTION_SERVICE.save(question);
 
         verify(MY_FAKE_QUESTION_REPOSITORY, never()).save(question);
