@@ -15,8 +15,6 @@ import static org.mockito.Mockito.*;
 class QuestionServiceTest {
     /*
      *   void save(Question question)
-     *   List<Answer> get_answers_from_a_question(Question question)
-     *
      */
 
     private final QuestionRepository MY_FAKE_QUESTION_REPOSITORY = mock(PostgreSQLQuestionRepositoryAdapter.class);
@@ -48,6 +46,4 @@ class QuestionServiceTest {
 
         verify(MY_FAKE_QUESTION_REPOSITORY, never()).save(question);
     }
-
-
 }

@@ -10,14 +10,14 @@ import java.util.UUID;
 
 public interface CategoryRepository {
 
-    public List<Category> getAll();
+    List<Category> getAll();
 
-    public void save(Category category);
+    void save(Category category);
 
-    public List<Quizz> getAllQuizzesById(UUID categoryId);
+    List<Quizz> getAllQuizzesById(UUID categoryId);
 
-    public List<Quizz> getAllQuizzesByCategoryName(Text categoryName);
+    List<Quizz> getAllQuizzesByCategoryName(Text categoryName);
 
-    public List<Quizz> getAllQuizzesByDifficulty(Difficulty difficulty);
+    List<Quizz> getAllQuizzesByDifficulty(Difficulty difficulty);
 
 }
