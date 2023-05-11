@@ -4,14 +4,14 @@ import com.leanquizzmind.lean_quizz_mind.domain.models.Question;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.QuestionRepository;
 
 public class QuestionService {
-    private QuestionRepository questionRepository;
+    private final QuestionRepository questionRepository;
 
     public QuestionService(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
     }
 
     public void save(Question question) {
-        throw new Error("Not Implemented yet");
+        this.questionRepository.save(question);
     }
 
 }
