@@ -15,15 +15,24 @@ public class PossibleAnswer {
 
     public static PossibleAnswer createPossibleAnswer(List<Answer> possibleAnswers) {
 
-        if (possibleAnswers.isEmpty()) { throw new NullPointerException("The possibleAnswer List cannot be empty"); }
+        boolean answersNotExists = possibleAnswers.isEmpty();
 
-        int haveCorrectFormat = Math.toIntExact(possibleAnswers.stream().filter(Answer::getCorrectAnswer).count());
+        if (answersNotExists) { throw new NullPointerException("The possibleAnswer List cannot be empty"); }
 
-        if (haveCorrectFormat > 1) {
+        boolean isMoreThanOneCorrectAnswer = isOnlyOneCorrectAnswer(possibleAnswers);
+
+        if (isMoreThanOneCorrectAnswer) {
             throw new IllegalArgumentException("Only one element can be the correct answer");
         }
 
         return new PossibleAnswer(possibleAnswers);
+    }
+
+    private static boolean isOnlyOneCorrectAnswer(List<Answer> possibleAnswers) {
+
+        int haveCorrectFormat = Math.toIntExact(possibleAnswers.stream().filter(Answer::getCorrectAnswer).count());
+
+        return haveCorrectFormat > 1;
     }
 
     public List<Answer> getPossibleAnswers() {
