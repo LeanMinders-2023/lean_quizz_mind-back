@@ -1,5 +1,6 @@
 package com.leanquizzmind.lean_quizz_mind.domain.models;
 
+import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.PossibleAnswer;
 import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
 
 import java.util.ArrayList;
@@ -10,16 +11,14 @@ public class Question {
 
     private UUID questionId;
     private Text question;
-
-    // TODO: Value object de la lista de answers para hacer las comprobaciones.
-    private List<Answer> possibleAnswers = new ArrayList<>();
+    private PossibleAnswer possibleAnswers;
 
     public Question() {}
-    public Question(Text question, List<Answer> possibleAnswers) {
+    public Question(Text question, PossibleAnswer possibleAnswers) {
         this.question = question;
         this.possibleAnswers = possibleAnswers;
     }
-    public Question(UUID questionId, Text question, List<Answer> possibleAnswers) {
+    public Question(UUID questionId, Text question, PossibleAnswer possibleAnswers) {
         this.questionId = questionId;
         this.question = question;
         this.possibleAnswers = possibleAnswers;
@@ -41,11 +40,11 @@ public class Question {
         this.question = question;
     }
 
-    public List<Answer> getPossibleAnswers() {
+    public PossibleAnswer getPossibleAnswers() {
         return possibleAnswers;
     }
 
-    public void setPossibleAnswers(List<Answer> possibleAnswers) {
+    public void setPossibleAnswers(PossibleAnswer possibleAnswers) {
         this.possibleAnswers = possibleAnswers;
     }
 
