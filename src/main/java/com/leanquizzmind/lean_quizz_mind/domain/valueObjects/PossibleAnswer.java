@@ -25,14 +25,25 @@ public class PossibleAnswer {
             throw new IllegalArgumentException("Only one element can be the correct answer");
         }
 
+        boolean allAnswerAreWrong = allAnswerAreFalse(possibleAnswers);
+
+        if (allAnswerAreWrong) {
+            throw new IllegalArgumentException("The answers cant all be wrong");
+        }
+
         return new PossibleAnswer(possibleAnswers);
     }
 
     private static boolean isOnlyOneCorrectAnswer(List<Answer> possibleAnswers) {
 
         int haveCorrectFormat = Math.toIntExact(possibleAnswers.stream().filter(Answer::getCorrectAnswer).count());
-
         return haveCorrectFormat > 1;
+    }
+
+    private static boolean allAnswerAreFalse(List<Answer> possibleAnswers) {
+
+        int haveCorrectFormat = Math.toIntExact(possibleAnswers.stream().filter(answer -> !answer.getCorrectAnswer()).count());
+        return haveCorrectFormat == possibleAnswers.size();
     }
 
     public List<Answer> getPossibleAnswers() {
