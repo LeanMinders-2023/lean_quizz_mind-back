@@ -48,4 +48,14 @@ public class PossibleAnswerTest {
         assertThrows(IllegalArgumentException.class, () -> PossibleAnswer.createPossibleAnswer(answerList));
     }
 
+    @Test
+    void should_return_an_error_response_when_all_answer_are_false() {
+        Answer firstAnswer = new Answer(firstText, false);
+        Answer secondAnswer = new Answer(secondText, false);
+        Answer thirdAnswer = new Answer(thirdText, false);
+        List<Answer> answerList = List.of(firstAnswer, secondAnswer, thirdAnswer);
+
+        assertThrows(IllegalArgumentException.class, () -> PossibleAnswer.createPossibleAnswer(answerList));
+    }
+
 }
