@@ -32,14 +32,14 @@ public class PossibleAnswerTest {
     }
 
     @Test
-    void should_pass_empty_list_error_response() {
+    void should_return_empty_list_error_response() {
         List<Answer> answerList = List.of();
 
         assertThrows(NullPointerException.class, () -> PossibleAnswer.createPossibleAnswer(answerList));
     }
 
     @Test
-    void should_pass_an_error_response_that_there_cant_be_two_correct_asnwers() {
+    void should_return_an_error_response_when_exists_two_correct_answers() {
         Answer firstAnswer = new Answer(firstText, true);
         Answer secondAnswer = new Answer(secondText, true);
         Answer thirdAnswer = new Answer(thirdText, false);

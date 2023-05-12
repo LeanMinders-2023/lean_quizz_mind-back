@@ -17,6 +17,12 @@ public class PossibleAnswer {
 
         if (possibleAnswers.isEmpty()) { throw new NullPointerException("The possibleAnswer List cannot be empty"); }
 
+        int haveCorrectFormat = Math.toIntExact(possibleAnswers.stream().filter(Answer::getCorrectAnswer).count());
+
+        if (haveCorrectFormat > 1) {
+            throw new IllegalArgumentException("Only one element can be the correct answer");
+        }
+
         return new PossibleAnswer(possibleAnswers);
     }
 
