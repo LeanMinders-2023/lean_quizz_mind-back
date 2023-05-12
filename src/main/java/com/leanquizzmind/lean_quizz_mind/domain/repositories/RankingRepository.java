@@ -8,10 +8,8 @@ import java.util.UUID;
 
 public interface RankingRepository {
 
-    public void save(Ranking ranking);
+    void save(Ranking ranking);
 
-    public int getPositionBy(Text nickname);
-
-    public boolean nickNameExist(Text nickname);
+    int getPositionBy(Text nickname);
 
 }

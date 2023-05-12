@@ -23,8 +23,8 @@ class QuestionServiceTest {
      *   PossibleAnswer getAll(UUID questionId)     ->      return a PossibleAnswer list object  with the possible answers
      */
 
-    private final QuestionRepository MY_FAKE_QUESTION_REPOSITORY = mock(PostgreSQLQuestionRepositoryAdapter.class);
-    private final QuestionService QUESTION_SERVICE = new QuestionService(MY_FAKE_QUESTION_REPOSITORY);
+    private final QuestionRepository MOCK_QUESTION_REPOSITORY = mock(PostgreSQLQuestionRepositoryAdapter.class);
+    private final QuestionService QUESTION_SERVICE = new QuestionService(MOCK_QUESTION_REPOSITORY);
     private final Text QUESTION_TEXT = Text.createText("My new question");
     private final Text ANSWER_TEXT = Text.createText("My new answer");
     private PossibleAnswer possibleAnswers;
@@ -40,23 +40,23 @@ class QuestionServiceTest {
 
         QUESTION_SERVICE.save(question);
 
-        verify(MY_FAKE_QUESTION_REPOSITORY).save(question);
+        verify(MOCK_QUESTION_REPOSITORY).save(question);
     }
     @Test
     void should_not_save_an_existent_question() {
         Question question = new Question(QUESTION_TEXT, possibleAnswers);
 
-        when(MY_FAKE_QUESTION_REPOSITORY.questionExists(question)).thenReturn(true);
+        when(MOCK_QUESTION_REPOSITORY.questionExists(question)).thenReturn(true);
         QUESTION_SERVICE.save(question);
 
-        verify(MY_FAKE_QUESTION_REPOSITORY, never()).save(question);
+        verify(MOCK_QUESTION_REPOSITORY, never()).save(question);
     }
 
     @Test
     void should_get_a_list_with_possible_answer_data() {
         UUID questionId = UUID.randomUUID();
 
-        when(MY_FAKE_QUESTION_REPOSITORY.getAll(questionId)).thenReturn(possibleAnswers);
+        when(MOCK_QUESTION_REPOSITORY.getAll(questionId)).thenReturn(possibleAnswers);
         PossibleAnswer serviceResponse = QUESTION_SERVICE.getAllPossibleAnswers(questionId);
 
         assertEquals(serviceResponse, possibleAnswers);

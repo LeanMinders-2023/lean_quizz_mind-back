@@ -21,6 +21,12 @@ public class Ranking {
         this.time = time;
     }
 
+    public Ranking(Text nickname, float points, Time time) {
+        this.nickname = nickname;
+        this.points = points;
+        this.time = time;
+    }
+
     public UUID getRankingId() {
         return rankingId;
     }
