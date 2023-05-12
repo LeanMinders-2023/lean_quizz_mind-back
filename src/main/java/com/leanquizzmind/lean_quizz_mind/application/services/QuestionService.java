@@ -23,7 +23,7 @@ public class QuestionService {
 
     public PossibleAnswer getAllPossibleAnswers(UUID questionId) {
 
-        throw new Error("Not implemented yet");
+        return questionRepository.getAll(questionId);
     }
 
 }
