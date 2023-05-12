@@ -8,8 +8,11 @@ import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
 import com.leanquizzmind.lean_quizz_mind.infraestructure.repositories.PostgreSQLQuestionRepositoryAdapter;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.*;
+
 
 import java.util.List;
+import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 
@@ -17,17 +20,18 @@ class QuestionServiceTest {
     /*
      *   void save(Question question)               ->      save into database
      *   void save(Question existingQuestion)       ->      don`t save into database
+     *   PossibleAnswer getAll(UUID questionId)     ->      return a PossibleAnswer list object  with the possible answers
      */
 
     private final QuestionRepository MY_FAKE_QUESTION_REPOSITORY = mock(PostgreSQLQuestionRepositoryAdapter.class);
     private final QuestionService QUESTION_SERVICE = new QuestionService(MY_FAKE_QUESTION_REPOSITORY);
     private final Text QUESTION_TEXT = Text.createText("My new question");
+    private final Text ANSWER_TEXT = Text.createText("My new answer");
     private PossibleAnswer possibleAnswers;
     @BeforeEach
     void setUp() {
-        Text answerText = Text.createText("My new answer");
-        Answer firstAnswer = new Answer(answerText, true);
-        Answer secondAnswer = new Answer(answerText, false);
+        Answer firstAnswer = new Answer(ANSWER_TEXT, true);
+        Answer secondAnswer = new Answer(ANSWER_TEXT, false);
         possibleAnswers = PossibleAnswer.createPossibleAnswer(List.of(firstAnswer, secondAnswer));
     }
     @Test
@@ -46,5 +50,15 @@ class QuestionServiceTest {
         QUESTION_SERVICE.save(question);
 
         verify(MY_FAKE_QUESTION_REPOSITORY, never()).save(question);
+    }
+
+    @Test
+    void should_get_a_list_with_possible_answer_data() {
+        UUID questionId = UUID.randomUUID();
+
+        when(MY_FAKE_QUESTION_REPOSITORY.getAll(questionId)).thenReturn(possibleAnswers);
+        PossibleAnswer serviceResponse = QUESTION_SERVICE.getAllPossibleAnswers(questionId);
+
+        assertEquals(serviceResponse, possibleAnswers);
     }
 }

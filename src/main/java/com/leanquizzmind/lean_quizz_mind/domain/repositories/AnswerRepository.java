@@ -7,8 +7,8 @@ import java.util.UUID;
 
 public interface AnswerRepository {
 
-    public void save(Answer answer);
+    void save(Answer answer);
 
-    public boolean answersExist(Answer answer);
+    boolean answersExist(Answer answer);
 
 }

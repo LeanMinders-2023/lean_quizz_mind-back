@@ -3,8 +3,6 @@ package com.leanquizzmind.lean_quizz_mind.domain.models;
 import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.PossibleAnswer;
 import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.UUID;
 
 public class Question {
