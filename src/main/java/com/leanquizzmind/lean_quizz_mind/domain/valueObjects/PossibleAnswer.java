@@ -19,31 +19,19 @@ public class PossibleAnswer {
 
         if (answersNotExists) { throw new NullPointerException("The possibleAnswer List cannot be empty"); }
 
-        boolean isMoreThanOneCorrectAnswer = isOnlyOneCorrectAnswer(possibleAnswers);
+        boolean isIncorrectFormat = haveBadFormat(possibleAnswers);
 
-        if (isMoreThanOneCorrectAnswer) {
+        if (isIncorrectFormat) {
             throw new IllegalArgumentException("Only one element can be the correct answer");
-        }
-
-        boolean allAnswerAreWrong = allAnswerAreFalse(possibleAnswers);
-
-        if (allAnswerAreWrong) {
-            throw new IllegalArgumentException("The answers cant all be wrong");
         }
 
         return new PossibleAnswer(possibleAnswers);
     }
 
-    private static boolean isOnlyOneCorrectAnswer(List<Answer> possibleAnswers) {
+    private static boolean haveBadFormat(List<Answer> possibleAnswers) {
 
-        int haveCorrectFormat = Math.toIntExact(possibleAnswers.stream().filter(Answer::getCorrectAnswer).count());
-        return haveCorrectFormat > 1;
-    }
-
-    private static boolean allAnswerAreFalse(List<Answer> possibleAnswers) {
-
-        int haveCorrectFormat = Math.toIntExact(possibleAnswers.stream().filter(answer -> !answer.getCorrectAnswer()).count());
-        return haveCorrectFormat == possibleAnswers.size();
+        int haveBadFormat = Math.toIntExact(possibleAnswers.stream().filter(Answer::getCorrectAnswer).count());
+        return haveBadFormat != 1;
     }
 
     public List<Answer> getPossibleAnswers() {
