@@ -17,7 +17,7 @@ public class RankingService {
         rankingRepository.save(ranking);
     }
     public int getPositionBy(Text nickname) {
-        throw new Error("Not implemented yet");
+        return rankingRepository.getPositionBy(nickname);
     }
 
 }
