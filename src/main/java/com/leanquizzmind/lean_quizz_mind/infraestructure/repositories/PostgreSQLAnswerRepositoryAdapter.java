@@ -6,10 +6,10 @@ import org.springframework.stereotype.Component;
 @Component
 public class PostgreSQLAnswerRepositoryAdapter implements AnswerRepository {
 
-    private final JpaAnswerRepository jpaAnswerRepository;
+    private final JpaAnswerRepository JPA_ANSWER_REPOSITORY;
 
     public PostgreSQLAnswerRepositoryAdapter(JpaAnswerRepository jpaAnswerRepository) {
-        this.jpaAnswerRepository = jpaAnswerRepository;
+        this.JPA_ANSWER_REPOSITORY = jpaAnswerRepository;
     }
 
     public void save(Answer answer) {
