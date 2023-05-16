@@ -7,19 +7,19 @@ import org.springframework.stereotype.Component;
 @Component
 public class AnswerService {
 
-    private final AnswerRepository answerRepository;
+    private final AnswerRepository ANSWER_REPOSITORY;
 
     public AnswerService(AnswerRepository answerRepository) {
 
-        this.answerRepository = answerRepository;
+        this.ANSWER_REPOSITORY = answerRepository;
     }
 
     public void save(Answer answer) {
         answer.insertId();
-        boolean answerNotExist = !answerRepository.answersExist(answer);
+        boolean answerNotExist = !ANSWER_REPOSITORY.answersExist(answer);
 
         if (answerNotExist) {
-            answerRepository.save(answer);
+            ANSWER_REPOSITORY.save(answer);
         }
     }
 

@@ -7,23 +7,23 @@ import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.PossibleAnswer;
 import java.util.UUID;
 
 public class QuestionService {
-    private final QuestionRepository questionRepository;
+    private final QuestionRepository QUESTION_REPOSITORY;
 
     public QuestionService(QuestionRepository questionRepository) {
-        this.questionRepository = questionRepository;
+        this.QUESTION_REPOSITORY = questionRepository;
     }
 
     public void save(Question question) {
         question.insertId();
-        boolean questionNotExist = !this.questionRepository.questionExists(question);
+        boolean questionNotExist = !this.QUESTION_REPOSITORY.questionExists(question);
         if (questionNotExist) {
-            this.questionRepository.save(question);
+            this.QUESTION_REPOSITORY.save(question);
         }
     }
 
     public PossibleAnswer getAllPossibleAnswers(UUID questionId) {
 
-        return questionRepository.getAll(questionId);
+        return QUESTION_REPOSITORY.getAll(questionId);
     }
 
 }
