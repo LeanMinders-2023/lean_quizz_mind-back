@@ -29,7 +29,19 @@ class RankingServiceTest {
         Ranking ranking = new Ranking(NICKNAME, (float) 9.7, time);
 
         RANKING_SERVICE.save(ranking);
+
         verify(MOCK_RANKING_REPOSITORY).save(ranking);
+    }
+
+    @Test
+    void should_get_a_user_position_by_nickname() {
+        Time time = new Time(0,3,45);
+        Ranking ranking = new Ranking(NICKNAME, (float) 9.7, time);
+
+        when(MOCK_RANKING_REPOSITORY.getPositionBy(NICKNAME)).thenReturn(4);
+        int position = RANKING_SERVICE.getPositionBy(NICKNAME);
+
+        assertEquals(position, 4);
     }
 
 }
