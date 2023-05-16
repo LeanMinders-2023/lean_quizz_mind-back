@@ -8,10 +8,10 @@ import java.util.UUID;
 
 public class PostgreSQLQuestionRepositoryAdapter implements QuestionRepository {
 
-    private final JpaQuestionRepository JPA_QUESTION_RESPOSITORY;
+    private final JpaRankingRepository JPA_RANKING_REPOSITORY;
 
-    public PostgreSQLQuestionRepositoryAdapter(JpaQuestionRepository jpa_question_respository) {
-        JPA_QUESTION_RESPOSITORY = jpa_question_respository;
+    public PostgreSQLQuestionRepositoryAdapter(JpaRankingRepository jpa_ranking_repository) {
+        JPA_RANKING_REPOSITORY = jpa_ranking_repository;
     }
 
     @Override
