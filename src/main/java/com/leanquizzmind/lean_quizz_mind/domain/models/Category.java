@@ -1,7 +1,5 @@
 package com.leanquizzmind.lean_quizz_mind.domain.models;
 
-import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
@@ -9,15 +7,15 @@ import java.util.UUID;
 public class Category {
 
     private UUID categoryId;
-    private Text category;
-    private List<Quizz> quizzList = new ArrayList<>();
+    private String category;
+    private List<Quiz> quizList = new ArrayList<>();
 
     public Category() {}
 
-    public Category(UUID categoryId, Text category, List<Quizz> quizzList) {
+    public Category(UUID categoryId, String category, List<Quiz> quizList) {
         this.categoryId = categoryId;
         this.category = category;
-        this.quizzList = quizzList;
+        this.quizList = quizList;
     }
 
     public UUID getCategoryId() {
@@ -28,20 +26,20 @@ public class Category {
         this.categoryId = categoryId;
     }
 
-    public Text getCategory() {
+    public String getCategory() {
         return category;
     }
 
-    public void setCategory(Text category) {
+    public void setCategory(String category) {
         this.category = category;
     }
 
-    public List<Quizz> getQuizzList() {
-        return quizzList;
+    public List<Quiz> getQuizzList() {
+        return quizList;
     }
 
-    public void setQuizzList(List<Quizz> quizzList) {
-        this.quizzList = quizzList;
+    public void setQuizzList(List<Quiz> quizList) {
+        this.quizList = quizList;
     }
 
     public void insertId() {

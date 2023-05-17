@@ -1,27 +1,25 @@
 package com.leanquizzmind.lean_quizz_mind.domain.models;
 
-import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
-
 import java.sql.Time;
 import java.util.UUID;
 
 public class Ranking {
 
     private UUID rankingId;
-    private Text nickname;
+    private String nickname;
     private float points;
     private Time time;
 
     public Ranking() {}
 
-    public Ranking(UUID rankingId, Text nickname, float points, Time time) {
+    public Ranking(UUID rankingId, String nickname, float points, Time time) {
         this.rankingId = rankingId;
         this.nickname = nickname;
         this.points = points;
         this.time = time;
     }
 
-    public Ranking(Text nickname, float points, Time time) {
+    public Ranking(String nickname, float points, Time time) {
         this.nickname = nickname;
         this.points = points;
         this.time = time;
@@ -35,11 +33,11 @@ public class Ranking {
         this.rankingId = rankingId;
     }
 
-    public Text getNickname() {
+    public String getNickname() {
         return nickname;
     }
 
-    public void setNickname(Text nickname) {
+    public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 

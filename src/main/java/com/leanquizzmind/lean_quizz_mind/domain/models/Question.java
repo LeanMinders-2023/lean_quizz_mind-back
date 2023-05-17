@@ -1,25 +1,22 @@
 package com.leanquizzmind.lean_quizz_mind.domain.models;
 
-import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.PossibleAnswer;
-import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
-
+import java.util.List;
 import java.util.UUID;
 
 public class Question {
-
     private UUID questionId;
-    private Text question;
-    private PossibleAnswer possibleAnswers;
+    private String question;
+    private List<Answer> answers;
 
     public Question() {}
-    public Question(Text question, PossibleAnswer possibleAnswers) {
+    public Question(String question, List<Answer> answers) {
         this.question = question;
-        this.possibleAnswers = possibleAnswers;
+        this.answers = answers;
     }
-    public Question(UUID questionId, Text question, PossibleAnswer possibleAnswers) {
+    public Question(UUID questionId, String question, List<Answer> answers) {
         this.questionId = questionId;
         this.question = question;
-        this.possibleAnswers = possibleAnswers;
+        this.answers = answers;
     }
 
     public UUID getQuestionId() {
@@ -30,20 +27,20 @@ public class Question {
         this.questionId = questionId;
     }
 
-    public Text getQuestion() {
+    public String getQuestion() {
         return question;
     }
 
-    public void setQuestion(Text question) {
+    public void setQuestion(String question) {
         this.question = question;
     }
 
-    public PossibleAnswer getPossibleAnswers() {
-        return possibleAnswers;
+    public List<Answer> getAnswers() {
+        return answers;
     }
 
-    public void setPossibleAnswers(PossibleAnswer possibleAnswers) {
-        this.possibleAnswers = possibleAnswers;
+    public void setAnswers(List<Answer> answers) {
+        this.answers = answers;
     }
 
     public void insertId() {

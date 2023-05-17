@@ -1,6 +1,5 @@
 package com.leanquizzmind.lean_quizz_mind.infraestructure.entities;
 
-import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
 import jakarta.persistence.*;
 
 import java.util.ArrayList;
@@ -10,12 +9,12 @@ import java.util.UUID;
 @Entity
 @Table(name = "question")
 public class QuestionEntity {
-
+    @Id
     @Column(name = "questionId", nullable = false)
     private UUID questionId;
 
     @Column(name = "question", nullable = false)
-    private Text question;
+    private String question;
 
     @OneToMany(cascade = CascadeType.ALL,
             orphanRemoval = true)
@@ -23,13 +22,13 @@ public class QuestionEntity {
 
     public QuestionEntity() {}
 
-    public QuestionEntity(UUID questionId, Text question, List<AnswerEntity> possibleAnswerEntitiesList) {
+    public QuestionEntity(UUID questionId, String question, List<AnswerEntity> possibleAnswerEntitiesList) {
         this.questionId = questionId;
         this.question = question;
         this.possibleAnswerEntitiesList = possibleAnswerEntitiesList;
     }
 
-    public QuestionEntity(Text question, List<AnswerEntity> possibleAnswerEntitiesList) {
+    public QuestionEntity(String question, List<AnswerEntity> possibleAnswerEntitiesList) {
         this.question = question;
         this.possibleAnswerEntitiesList = possibleAnswerEntitiesList;
     }
@@ -42,11 +41,11 @@ public class QuestionEntity {
         this.questionId = questionId;
     }
 
-    public Text getQuestion() {
+    public String getQuestion() {
         return question;
     }
 
-    public void setQuestion(Text question) {
+    public void setQuestion(String question) {
         this.question = question;
     }
 

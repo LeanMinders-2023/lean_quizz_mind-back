@@ -2,7 +2,6 @@ package com.leanquizzmind.lean_quizz_mind.application.services;
 
 import com.leanquizzmind.lean_quizz_mind.domain.models.Ranking;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.RankingRepository;
-import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
 import com.leanquizzmind.lean_quizz_mind.infraestructure.repositories.PostgreSQLRankingRepositoryAdapter;
 import org.junit.jupiter.api.Test;
 
@@ -21,7 +20,7 @@ class RankingServiceTest {
     private final RankingRepository MOCK_RANKING_REPOSITORY = mock(PostgreSQLRankingRepositoryAdapter.class);
     private final RankingService RANKING_SERVICE = new RankingService(MOCK_RANKING_REPOSITORY);
 
-    private final Text NICKNAME = Text.createText("example nickname");
+    private final String NICKNAME = "example nickname";
 
     @Test
     void should_save_a_new_ranking() {
@@ -34,7 +33,7 @@ class RankingServiceTest {
     }
 
     @Test
-    void should_get_a_user_position_by_nickname() {
+    void should_get_an_user_position_by_nickname() {
         Time time = new Time(0,3,45);
         Ranking ranking = new Ranking(NICKNAME, (float) 9.7, time);
 

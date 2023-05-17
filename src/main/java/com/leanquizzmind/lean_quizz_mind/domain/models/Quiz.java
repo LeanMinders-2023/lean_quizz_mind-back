@@ -1,41 +1,42 @@
 package com.leanquizzmind.lean_quizz_mind.domain.models;
 
-import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
 
 import java.util.List;
 import java.util.UUID;
 
-public class Quizz {
-
-    private UUID quizzId;
-    private Text explication;
+public class Quiz {
+    private UUID quizId;
+    private String explication;
     private Difficulty difficulty;
     private List<Question> questions;
     private Ranking ranking;
-
-    public Quizz() {}
-
-    public Quizz(UUID quizzId, Text explication, Difficulty difficulty, List<Question> questions, Ranking ranking) {
-        this.quizzId = quizzId;
+    public Quiz() {}
+    public Quiz(UUID quizId, String explication, Difficulty difficulty, List<Question> questions, Ranking ranking) {
+        this.quizId = quizId;
         this.explication = explication;
         this.difficulty = difficulty;
         this.questions = questions;
         this.ranking = ranking;
     }
-
-    public UUID getQuizzId() {
-        return quizzId;
+    public Quiz(String explication, Difficulty difficulty, List<Question> questions, Ranking ranking) {
+        this.explication = explication;
+        this.difficulty = difficulty;
+        this.questions = questions;
+        this.ranking = ranking;
+    }
+    public UUID getQuizId() {
+        return quizId;
     }
 
-    public void setQuizzId(UUID quizzId) {
-        this.quizzId = quizzId;
+    public void setQuizId(UUID quizzId) {
+        this.quizId = quizzId;
     }
 
-    public Text getExplication() {
+    public String getExplication() {
         return explication;
     }
 
-    public void setExplication(Text explication) {
+    public void setExplication(String explication) {
         this.explication = explication;
     }
 
@@ -64,6 +65,6 @@ public class Quizz {
     }
 
     public void insertId() {
-        this.quizzId = UUID.randomUUID();
+        this.quizId = UUID.randomUUID();
     }
 }

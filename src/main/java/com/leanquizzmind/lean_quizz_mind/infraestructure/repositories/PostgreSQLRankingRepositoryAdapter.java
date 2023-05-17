@@ -2,7 +2,7 @@ package com.leanquizzmind.lean_quizz_mind.infraestructure.repositories;
 
 import com.leanquizzmind.lean_quizz_mind.domain.models.Ranking;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.RankingRepository;
-import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
+
 
 public class PostgreSQLRankingRepositoryAdapter implements RankingRepository {
 
@@ -18,7 +18,7 @@ public class PostgreSQLRankingRepositoryAdapter implements RankingRepository {
     }
 
     @Override
-    public int getPositionBy(Text nickname) {
+    public int getPositionBy(String nickname) {
         throw new Error("Not implemented yet");
     }
 }

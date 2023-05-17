@@ -1,8 +1,8 @@
 package com.leanquizzmind.lean_quizz_mind.infraestructure.entities;
 
-import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
 import jakarta.persistence.Table;
 
 import java.sql.Time;
@@ -11,12 +11,12 @@ import java.util.UUID;
 @Entity
 @Table(name = "rankings")
 public class RankingEntity {
-
+    @Id
     @Column(name = "rankingId", nullable = false)
     private UUID rankingId;
 
     @Column(name = "nickname", nullable = false)
-    private Text nickname;
+    private String nickname;
 
     @Column(name = "points", nullable = false)
     private float points;
@@ -26,14 +26,14 @@ public class RankingEntity {
 
     public RankingEntity() {}
 
-    public RankingEntity(UUID rankingId, Text nickname, float points, Time time) {
+    public RankingEntity(UUID rankingId, String nickname, float points, Time time) {
         this.rankingId = rankingId;
         this.nickname = nickname;
         this.points = points;
         this.time = time;
     }
 
-    public RankingEntity(Text nickname, float points, Time time) {
+    public RankingEntity(String nickname, float points, Time time) {
         this.nickname = nickname;
         this.points = points;
         this.time = time;
@@ -47,11 +47,11 @@ public class RankingEntity {
         this.rankingId = rankingId;
     }
 
-    public Text getNickname() {
+    public String getNickname() {
         return nickname;
     }
 
-    public void setNickname(Text nickname) {
+    public void setNickname(String nickname) {
         this.nickname = nickname;
     }
 

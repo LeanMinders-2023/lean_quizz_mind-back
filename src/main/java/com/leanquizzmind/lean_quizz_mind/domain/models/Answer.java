@@ -1,22 +1,16 @@
 package com.leanquizzmind.lean_quizz_mind.domain.models;
-
-import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
-
 import java.util.UUID;
 
 public class Answer {
 
     private UUID answerId;
-    private Text answer;
+    private String answer;
     private boolean correctAnswer;
-
-    // Clase records java
-
-    public Answer(Text answer, boolean correctAnswer) {
+    public Answer(String answer, boolean correctAnswer) {
         this.answer = answer;
         this.correctAnswer = correctAnswer;
     }
-    public Answer(UUID answerId, Text answer, boolean correctAnswer) {
+    public Answer(UUID answerId, String answer, boolean correctAnswer) {
         this.answerId = answerId;
         this.answer = answer;
         this.correctAnswer = correctAnswer;
@@ -30,22 +24,12 @@ public class Answer {
         this.answerId = answerId;
     }
 
-    public Text getAnswer() {
+    public String getAnswer() {
         return answer;
     }
-
-    public void setAnswer(Text answer) {
-        this.answer = answer;
-    }
-
     public boolean getCorrectAnswer() {
         return correctAnswer;
     }
-
-    public void setCorrectAnswer(boolean correctAnswer) {
-        this.correctAnswer = correctAnswer;
-    }
-
     public void insertId() {
         this.answerId = UUID.randomUUID();
     }

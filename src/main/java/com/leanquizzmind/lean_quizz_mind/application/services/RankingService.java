@@ -2,7 +2,7 @@ package com.leanquizzmind.lean_quizz_mind.application.services;
 
 import com.leanquizzmind.lean_quizz_mind.domain.models.Ranking;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.RankingRepository;
-import com.leanquizzmind.lean_quizz_mind.domain.valueObjects.Text;
+
 
 public class RankingService {
 
@@ -16,7 +16,7 @@ public class RankingService {
         ranking.insertId();
         rankingRepository.save(ranking);
     }
-    public int getPositionBy(Text nickname) {
+    public int getPositionBy(String nickname) {
         return rankingRepository.getPositionBy(nickname);
     }
 
