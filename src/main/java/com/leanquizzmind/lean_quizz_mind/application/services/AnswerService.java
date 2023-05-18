@@ -15,23 +15,26 @@ public class AnswerService {
     }
 
     public Either<Warning, Answer> save(Answer answer) {
-
-        if (answerIsNotCorrect(answer)){
-            return Either.left(Warning.STATEMENT_CANNOT_BE_EMPTY);
+        Either<Warning, Answer> validateAnswer = getWarningAnswerEither(answer);
+        if (validateAnswer != null) {
+            return validateAnswer;
         }
 
         answer.insertId();
-        boolean answerNotExist = !ANSWER_REPOSITORY.answersExist(answer);
+        ANSWER_REPOSITORY.save(answer);
+        return null;
+    }
 
-        if (answerNotExist) {
-            ANSWER_REPOSITORY.save(answer);
-            return null;
+    private Either<Warning, Answer> getWarningAnswerEither(Answer answer) {
+        boolean answerStatementIsEmpty = answer.getAnswer().isEmpty();
+        if (answerStatementIsEmpty){
+            return Either.left(Warning.STATEMENT_CANNOT_BE_EMPTY);
         }
 
-        return Either.left(Warning.DATA_ALREADY_EXISTS);
+        if (answer.getAnswerId() != null) {
+            return Either.left(Warning.DATA_ALREADY_EXISTS);
+        }
+        return null;
     }
-    private boolean answerIsNotCorrect(Answer answer) {
 
-        return answer.getAnswer().isEmpty();
-    }
 }

@@ -35,8 +35,8 @@ class AnswerServiceTest {
     @Test
     void should_not_save_answer_if_exists() {
         Answer answer = new Answer(ANSWER_TEXT, false);
+        answer.insertId();
 
-        when(MOCK_ANSWER_REPOSITORY.answersExist(answer)).thenReturn(true);
         Either<Warning, Answer> possibleAnswer = ANSWER_SERVICE.save(answer);
 
         verify(MOCK_ANSWER_REPOSITORY, never()).save(answer);
