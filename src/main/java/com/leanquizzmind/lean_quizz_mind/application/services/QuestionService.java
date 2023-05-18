@@ -37,16 +37,19 @@ public class QuestionService {
 
         UUID questionId = question.getQuestionId();
         List<Answer> answers = question.getAnswers();
-        if (questionId != null) {
+        boolean questionExists = questionId != null;
+        if (questionExists) {
             return Either.left(QuestionWarnings.DATA_ALREADY_EXISTS);
         }
 
-        if (answers.isEmpty()) {
+        boolean possibleAnswerListIsEmpty = answers.isEmpty();
+        if (possibleAnswerListIsEmpty) {
             return Either.left(QuestionWarnings.ANSWER_LIST_CANNOT_BE_EMPTY);
         }
 
         int numberOfCorrectAnswer = Math.toIntExact(answers.stream().filter(Answer::getCorrectAnswer).count());
-        if (numberOfCorrectAnswer != 1) {
+        boolean areNotOnlyOneCorrectAnswer = numberOfCorrectAnswer != 1;
+        if (areNotOnlyOneCorrectAnswer) {
             return Either.left(QuestionWarnings.ONLY_ONE_CORRECT_ANSWER_REQUIRED);
         }
         return null;
