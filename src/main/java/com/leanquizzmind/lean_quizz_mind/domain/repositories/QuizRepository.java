@@ -9,10 +9,10 @@ import java.util.UUID;
 
 public interface QuizRepository {
 
-    public void save(Quiz quiz);
+    void save(Quiz quiz);
 
-    public List<Question> getAllQuestions(UUID quiz);
+    List<Question> getAllQuestions(UUID quiz);
 
-    public Ranking getRankingBy(UUID quizId);
+    Ranking getRankingBy(UUID quizId);
 
 }
