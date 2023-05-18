@@ -15,7 +15,6 @@ import static org.mockito.Mockito.*;
 /*
  *   save(Answer answer)         ->      save into the database
  *   save(Answer answerExist)    ->      don`t save into the database
- *   if answer text exists       ->      don`t save into the database
  *   if answer text is empty     ->      don`t save into the database
  */
 
@@ -42,6 +41,16 @@ class AnswerServiceTest {
 
         verify(MOCK_ANSWER_REPOSITORY, never()).save(answer);
         assertEquals(possibleAnswer.getLeft(), Warning.DATA_ALREADY_EXISTS);
+    }
+
+    @Test
+    void should_not_save_answer_if_statement_is_empty() {
+        Answer answer = new Answer("", false);
+
+        Either<Warning, Answer> possibleAnswer = ANSWER_SERVICE.save(answer);
+
+        verify(MOCK_ANSWER_REPOSITORY, never()).save(answer);
+        assertEquals(possibleAnswer.getLeft(), Warning.STATEMENT_CANNOT_BE_EMPTY);
     }
 
 }

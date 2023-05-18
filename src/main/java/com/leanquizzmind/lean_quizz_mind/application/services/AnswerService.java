@@ -26,6 +26,6 @@ public class AnswerService {
         return Either.left(Warning.DATA_ALREADY_EXISTS);
     }
     private boolean answerIsCorrect(Answer answer) {
-        throw new Error("Not implemented yet");
+            throw new Error("Not implemented yet");
     }
 }
