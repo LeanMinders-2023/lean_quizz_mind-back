@@ -26,12 +26,11 @@ class QuestionServiceTest {
     private final QuestionRepository MOCK_QUESTION_REPOSITORY = mock(PostgreSQLQuestionRepositoryAdapter.class);
     private final QuestionService QUESTION_SERVICE = new QuestionService(MOCK_QUESTION_REPOSITORY);
     private final String QUESTION_TEXT = "My new question";
-    private final String ANSWER_TEXT = "My new answer";
     private List<Answer> possibleAnswers;
     @BeforeEach
     void setUp() {
-        Answer firstAnswer = new Answer(ANSWER_TEXT, true);
-        Answer secondAnswer = new Answer(ANSWER_TEXT, false);
+        Answer firstAnswer = new Answer("My new answer", true);
+        Answer secondAnswer = new Answer("My new answer", false);
         possibleAnswers = List.of(firstAnswer, secondAnswer);
     }
     @Test

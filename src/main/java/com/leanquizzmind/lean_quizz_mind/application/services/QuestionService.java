@@ -40,11 +40,15 @@ public class QuestionService {
         if (questionId != null) {
             return Either.left(QuestionWarnings.DATA_ALREADY_EXISTS);
         }
+
+        if (answers.isEmpty()) {
+            return Either.left(QuestionWarnings.ANSWER_LIST_CANNOT_BE_EMPTY);
+        }
+
         int numberOfCorrectAnswer = Math.toIntExact(answers.stream().filter(Answer::getCorrectAnswer).count());
         if (numberOfCorrectAnswer != 1) {
             return Either.left(QuestionWarnings.ONLY_ONE_CORRECT_ANSWER_REQUIRED);
         }
-
         return null;
     }
 }
