@@ -15,6 +15,11 @@ public class AnswerService {
     }
 
     public Either<Warning, Answer> save(Answer answer) {
+
+        if (answerIsNotCorrect(answer)){
+            return Either.left(Warning.STATEMENT_CANNOT_BE_EMPTY);
+        }
+
         answer.insertId();
         boolean answerNotExist = !ANSWER_REPOSITORY.answersExist(answer);
 
@@ -25,7 +30,8 @@ public class AnswerService {
 
         return Either.left(Warning.DATA_ALREADY_EXISTS);
     }
-    private boolean answerIsCorrect(Answer answer) {
-            throw new Error("Not implemented yet");
+    private boolean answerIsNotCorrect(Answer answer) {
+
+        return answer.getAnswer().isEmpty();
     }
 }
