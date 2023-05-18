@@ -64,4 +64,14 @@ class QuestionServiceTest {
         assertEquals(serviceResponse, possibleAnswers);
     }
 
+    @Test
+    void should_not_save_question_if_have_a_empty_answer_list() {
+        Question question = new Question(QUESTION_TEXT, List.of());
+
+        Either<QuestionWarnings, Question> possibleQuestion = QUESTION_SERVICE.save(question);
+
+        verify(MOCK_QUESTION_REPOSITORY, never()).save(question);
+        assertEquals(possibleQuestion.getLeft(), QuestionWarnings.ANSWER_LIST_CANNOT_BE_EMPTY);
+    }
+
 }
