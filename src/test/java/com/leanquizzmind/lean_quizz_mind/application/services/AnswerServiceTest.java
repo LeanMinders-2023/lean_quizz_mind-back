@@ -1,6 +1,6 @@
 package com.leanquizzmind.lean_quizz_mind.application.services;
 
-import com.leanquizzmind.lean_quizz_mind.application.warnings.Warning;
+import com.leanquizzmind.lean_quizz_mind.application.warnings.AnswerWarnings;
 import com.leanquizzmind.lean_quizz_mind.domain.models.Answer;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.AnswerRepository;
 
@@ -27,7 +27,7 @@ class AnswerServiceTest {
     void should_save_a_new_answer() {
         Answer answer = new Answer(ANSWER_TEXT, false);
 
-        Either<Warning, Answer> possibleAnswer = ANSWER_SERVICE.save(answer);
+        Either<AnswerWarnings, Answer> possibleAnswer = ANSWER_SERVICE.save(answer);
 
         verify(MOCK_ANSWER_REPOSITORY).save(answer);
         assertNull(possibleAnswer);
@@ -37,20 +37,20 @@ class AnswerServiceTest {
         Answer answer = new Answer(ANSWER_TEXT, false);
         answer.insertId();
 
-        Either<Warning, Answer> possibleAnswer = ANSWER_SERVICE.save(answer);
+        Either<AnswerWarnings, Answer> possibleAnswer = ANSWER_SERVICE.save(answer);
 
         verify(MOCK_ANSWER_REPOSITORY, never()).save(answer);
-        assertEquals(possibleAnswer.getLeft(), Warning.DATA_ALREADY_EXISTS);
+        assertEquals(possibleAnswer.getLeft(), AnswerWarnings.DATA_ALREADY_EXISTS);
     }
 
     @Test
     void should_not_save_answer_if_statement_is_empty() {
         Answer answer = new Answer("", false);
 
-        Either<Warning, Answer> possibleAnswer = ANSWER_SERVICE.save(answer);
+        Either<AnswerWarnings, Answer> possibleAnswer = ANSWER_SERVICE.save(answer);
 
         verify(MOCK_ANSWER_REPOSITORY, never()).save(answer);
-        assertEquals(possibleAnswer.getLeft(), Warning.STATEMENT_CANNOT_BE_EMPTY);
+        assertEquals(possibleAnswer.getLeft(), AnswerWarnings.STATEMENT_CANNOT_BE_EMPTY);
     }
 
 }

@@ -1,9 +1,11 @@
 package com.leanquizzmind.lean_quizz_mind.application.services;
 
+import com.leanquizzmind.lean_quizz_mind.application.warnings.QuestionWarnings;
 import com.leanquizzmind.lean_quizz_mind.domain.models.Answer;
 import com.leanquizzmind.lean_quizz_mind.domain.models.Question;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.QuestionRepository;
 import com.leanquizzmind.lean_quizz_mind.infraestructure.repositories.PostgreSQLQuestionRepositoryAdapter;
+import io.vavr.control.Either;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
@@ -15,9 +17,10 @@ import java.util.UUID;
 import static org.mockito.Mockito.*;
 
 /*
- *   void save(Question question)               ->      save into database
- *   void save(Question existingQuestion)       ->      don`t save into database
- *   PossibleAnswer getAll(UUID questionId)     ->      return a PossibleAnswer list object  with the possible answers
+ *   void save(Question question)                             ->      save into database
+ *   void save(Question existingQuestion)                     ->      don`t save into database
+ *   List<Answer> getAll(UUID questionId)                     ->      return a PossibleAnswer list object  with the possible answers
+ *   void save(Question question) with empty List<Answer>     ->      don`t save into database
  */
 class QuestionServiceTest {
     private final QuestionRepository MOCK_QUESTION_REPOSITORY = mock(PostgreSQLQuestionRepositoryAdapter.class);
@@ -35,18 +38,20 @@ class QuestionServiceTest {
     void should_save_a_new_question() {
         Question question = new Question(QUESTION_TEXT, possibleAnswers);
 
-        QUESTION_SERVICE.save(question);
+        Either<QuestionWarnings, Question> possibleQuestion = QUESTION_SERVICE.save(question);
 
         verify(MOCK_QUESTION_REPOSITORY).save(question);
+        assertNull(possibleQuestion);
     }
     @Test
     void should_not_save_an_existent_question() {
         Question question = new Question(QUESTION_TEXT, possibleAnswers);
+        question.insertId();
 
-        when(MOCK_QUESTION_REPOSITORY.questionExists(question)).thenReturn(true);
-        QUESTION_SERVICE.save(question);
+        Either<QuestionWarnings, Question> possibleQuestion = QUESTION_SERVICE.save(question);
 
         verify(MOCK_QUESTION_REPOSITORY, never()).save(question);
+        assertEquals(possibleQuestion.getLeft(), QuestionWarnings.DATA_ALREADY_EXISTS);
     }
 
     @Test
@@ -58,4 +63,5 @@ class QuestionServiceTest {
 
         assertEquals(serviceResponse, possibleAnswers);
     }
+
 }
