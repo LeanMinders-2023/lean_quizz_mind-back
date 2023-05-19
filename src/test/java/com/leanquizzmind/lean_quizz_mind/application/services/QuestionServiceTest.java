@@ -4,7 +4,7 @@ import com.leanquizzmind.lean_quizz_mind.application.warnings.QuestionWarnings;
 import com.leanquizzmind.lean_quizz_mind.domain.models.Answer;
 import com.leanquizzmind.lean_quizz_mind.domain.models.Question;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.QuestionRepository;
-import com.leanquizzmind.lean_quizz_mind.infraestructure.repositories.PostgreSQLQuestionRepositoryAdapter;
+import com.leanquizzmind.lean_quizz_mind.infraestructure.repositories.PostgresSQLQuestionRepositoryAdapter;
 import io.vavr.control.Either;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,7 +23,7 @@ import static org.mockito.Mockito.*;
  *   void save(Question question) with empty List<Answer>     ->      don`t save into database and send ANSWER_LIST_CANNOT_BE_EMPTY warning
  */
 class QuestionServiceTest {
-    private final QuestionRepository MOCK_QUESTION_REPOSITORY = mock(PostgreSQLQuestionRepositoryAdapter.class);
+    private final QuestionRepository MOCK_QUESTION_REPOSITORY = mock(PostgresSQLQuestionRepositoryAdapter.class);
     private final QuestionService QUESTION_SERVICE = new QuestionService(MOCK_QUESTION_REPOSITORY);
     private final String QUESTION_TEXT = "My new question";
     private List<Answer> possibleAnswers;

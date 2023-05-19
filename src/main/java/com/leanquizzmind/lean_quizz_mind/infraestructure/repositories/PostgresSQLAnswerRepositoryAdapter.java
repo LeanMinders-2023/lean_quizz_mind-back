@@ -4,11 +4,11 @@ import com.leanquizzmind.lean_quizz_mind.domain.models.Answer;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.AnswerRepository;
 import org.springframework.stereotype.Component;
 @Component
-public class PostgreSQLAnswerRepositoryAdapter implements AnswerRepository {
+public class PostgresSQLAnswerRepositoryAdapter implements AnswerRepository {
 
     private final JpaAnswerRepository JPA_ANSWER_REPOSITORY;
 
-    public PostgreSQLAnswerRepositoryAdapter(JpaAnswerRepository jpaAnswerRepository) {
+    public PostgresSQLAnswerRepositoryAdapter(JpaAnswerRepository jpaAnswerRepository) {
         this.JPA_ANSWER_REPOSITORY = jpaAnswerRepository;
     }
 

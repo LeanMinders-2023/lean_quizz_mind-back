@@ -2,7 +2,7 @@ package com.leanquizzmind.lean_quizz_mind.application.services;
 
 import com.leanquizzmind.lean_quizz_mind.domain.models.Ranking;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.RankingRepository;
-import com.leanquizzmind.lean_quizz_mind.infraestructure.repositories.PostgreSQLRankingRepositoryAdapter;
+import com.leanquizzmind.lean_quizz_mind.infraestructure.repositories.PostgresSQLRankingRepositoryAdapter;
 import org.junit.jupiter.api.Test;
 
 import java.sql.Time;
@@ -17,7 +17,7 @@ class RankingServiceTest {
     *       void getPositionBy()            ->      get position in ranking
     */
 
-    private final RankingRepository MOCK_RANKING_REPOSITORY = mock(PostgreSQLRankingRepositoryAdapter.class);
+    private final RankingRepository MOCK_RANKING_REPOSITORY = mock(PostgresSQLRankingRepositoryAdapter.class);
     private final RankingService RANKING_SERVICE = new RankingService(MOCK_RANKING_REPOSITORY);
 
     private final String NICKNAME = "example nickname";

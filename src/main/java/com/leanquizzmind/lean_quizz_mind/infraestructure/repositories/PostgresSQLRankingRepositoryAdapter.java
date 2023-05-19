@@ -4,11 +4,11 @@ import com.leanquizzmind.lean_quizz_mind.domain.models.Ranking;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.RankingRepository;
 
 
-public class PostgreSQLRankingRepositoryAdapter implements RankingRepository {
+public class PostgresSQLRankingRepositoryAdapter implements RankingRepository {
 
     private final JpaAnswerRepository jpaAnswerRepository;
 
-    public PostgreSQLRankingRepositoryAdapter(JpaAnswerRepository jpaAnswerRepository) {
+    public PostgresSQLRankingRepositoryAdapter(JpaAnswerRepository jpaAnswerRepository) {
         this.jpaAnswerRepository = jpaAnswerRepository;
     }
 

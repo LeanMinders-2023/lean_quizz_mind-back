@@ -4,7 +4,7 @@ import com.leanquizzmind.lean_quizz_mind.application.warnings.AnswerWarnings;
 import com.leanquizzmind.lean_quizz_mind.domain.models.Answer;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.AnswerRepository;
 
-import com.leanquizzmind.lean_quizz_mind.infraestructure.repositories.PostgreSQLAnswerRepositoryAdapter;
+import com.leanquizzmind.lean_quizz_mind.infraestructure.repositories.PostgresSQLAnswerRepositoryAdapter;
 
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
@@ -19,7 +19,7 @@ import static org.mockito.Mockito.*;
  */
 
 class AnswerServiceTest {
-    private final AnswerRepository MOCK_ANSWER_REPOSITORY = mock(PostgreSQLAnswerRepositoryAdapter.class);
+    private final AnswerRepository MOCK_ANSWER_REPOSITORY = mock(PostgresSQLAnswerRepositoryAdapter.class);
     private final AnswerService ANSWER_SERVICE = new AnswerService(MOCK_ANSWER_REPOSITORY);
     private final String ANSWER_TEXT = "example answer text";
 
