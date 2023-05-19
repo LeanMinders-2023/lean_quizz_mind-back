@@ -77,4 +77,15 @@ class QuizServiceTest {
         assertEquals(possibleQuiz.get(), quiz);
     }
 
+    @Test
+    void should_get_a_quiz_by_id_that_not_exists_in_database() {
+        Quiz quiz = new Quiz("title example", "explication example", Difficulty.EASY, questions, ranking);
+        quiz.insertId();
+
+        when(mockQuizRepository.getQuizBy(quiz.getQuizId())).thenReturn(null);
+        Either<QuizWarnings, Quiz> possibleQuiz = quizService.getQuizById(quiz.getQuizId());
+
+        assertEquals(possibleQuiz.getLeft(), QuizWarnings.CANNOT_GET_QUIZ_THAT_NOT_EXISTS);
+    }
+
 }
