@@ -27,7 +27,8 @@ public class QuizService {
     }
 
     public Either<QuizWarnings, Quiz> getQuizById(UUID quizId) {
-        throw new Error("Not implemented yet");
+        Quiz quiz = quizRepository.getQuizBy(quizId);
+        return Either.right(quiz);
     }
 
 }
