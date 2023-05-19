@@ -5,6 +5,7 @@ import com.leanquizzmind.lean_quizz_mind.domain.models.Quiz;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.QuizRepository;
 import io.vavr.control.Either;
 
+import java.util.List;
 import java.util.UUID;
 
 public class QuizService {
@@ -33,6 +34,10 @@ public class QuizService {
             return Either.left(QuizWarnings.CANNOT_GET_QUIZ_THAT_NOT_EXISTS);
         }
         return Either.right(quiz);
+    }
+
+    public List<Quiz> getAllQuizzesByContainingTitle(String title) {
+        throw new Error("Not implemented yet");
     }
 
 }
