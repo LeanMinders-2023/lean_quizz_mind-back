@@ -1,8 +1,10 @@
 package com.leanquizzmind.lean_quizz_mind.application.services;
 
+import com.leanquizzmind.lean_quizz_mind.application.warnings.QuizWarnings;
 import com.leanquizzmind.lean_quizz_mind.domain.models.*;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.QuizRepository;
 import com.leanquizzmind.lean_quizz_mind.infraestructure.repositories.PostgresSQLQuizRepositoryAdapter;
+import io.vavr.control.Either;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +12,7 @@ import java.sql.Time;
 import java.util.List;
 
 import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 class QuizServiceTest {
 
@@ -25,7 +28,6 @@ class QuizServiceTest {
     private final QuizRepository mockQuizRepository = mock(PostgresSQLQuizRepositoryAdapter.class);
     private final QuizService quizService = new QuizService(mockQuizRepository);
 
-    private List<Answer> answers;
     private List<Question> questions;
     private Ranking ranking;
 
@@ -33,7 +35,7 @@ class QuizServiceTest {
     void setUp() {
         Answer firstAnswer = new Answer("My new answer", true);
         Answer secondAnswer = new Answer("My new answer", false);
-        answers = List.of(firstAnswer, secondAnswer);
+        List<Answer> answers = List.of(firstAnswer, secondAnswer);
         questions = List.of(
                 new Question("example", answers),
                 new Question("example", answers),
@@ -46,9 +48,10 @@ class QuizServiceTest {
     void should_save_quiz_into_database() {
         Quiz quiz = new Quiz("title example", "explication example", Difficulty.EASY, questions, ranking);
 
-        quizService.save(quiz);
+        Either<QuizWarnings, Quiz> possibleQuiz = quizService.save(quiz);
 
         verify(mockQuizRepository).save(quiz);
+        assertEquals(possibleQuiz.get(), quiz);
     }
 
 }
