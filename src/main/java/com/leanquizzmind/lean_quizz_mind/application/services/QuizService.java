@@ -13,7 +13,9 @@ public class QuizService {
 
     public Either<QuizWarnings, Quiz> save(Quiz quiz) {
 
-        if (quiz.getQuizId() != null) {
+        boolean quizExistsInDatabase = quiz.getQuizId() != null;
+
+        if (quizExistsInDatabase) {
             return Either.left(QuizWarnings.QUIZ_ALREADY_EXISTS);
         }
 
