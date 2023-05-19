@@ -54,4 +54,14 @@ class QuizServiceTest {
         assertEquals(possibleQuiz.get(), quiz);
     }
 
+    @Test
+    void should_save_existing_quiz_into_database() {
+        Quiz quiz = new Quiz("title example", "explication example", Difficulty.EASY, questions, ranking);
+
+        Either<QuizWarnings, Quiz> possibleQuiz = quizService.save(quiz);
+
+        verify(mockQuizRepository, never()).save(quiz);
+        assertEquals(possibleQuiz.getLeft(), QuizWarnings.QUIZ_ALREADY_EXISTS);
+    }
+
 }
