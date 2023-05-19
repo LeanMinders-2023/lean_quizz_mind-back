@@ -37,7 +37,7 @@ public class QuizService {
     }
 
     public List<Quiz> getAllQuizzesByContainingTitle(String title) {
-        throw new Error("Not implemented yet");
+        return quizRepository.getAllByContainingTitle(title);
     }
 
 }
