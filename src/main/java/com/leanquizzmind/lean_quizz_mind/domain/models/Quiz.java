@@ -6,30 +6,44 @@ import java.util.UUID;
 
 public class Quiz {
     private UUID quizId;
+    private String title;
     private String explication;
     private Difficulty difficulty;
     private List<Question> questions;
     private Ranking ranking;
     public Quiz() {}
-    public Quiz(UUID quizId, String explication, Difficulty difficulty, List<Question> questions, Ranking ranking) {
+
+    public Quiz(UUID quizId, String title, String explication, Difficulty difficulty, List<Question> questions, Ranking ranking) {
         this.quizId = quizId;
+        this.title = title;
         this.explication = explication;
         this.difficulty = difficulty;
         this.questions = questions;
         this.ranking = ranking;
     }
-    public Quiz(String explication, Difficulty difficulty, List<Question> questions, Ranking ranking) {
+
+    public Quiz(String title, String explication, Difficulty difficulty, List<Question> questions, Ranking ranking) {
+        this.title = title;
         this.explication = explication;
         this.difficulty = difficulty;
         this.questions = questions;
         this.ranking = ranking;
     }
+
     public UUID getQuizId() {
         return quizId;
     }
 
-    public void setQuizId(UUID quizzId) {
-        this.quizId = quizzId;
+    public void setQuizId(UUID quizId) {
+        this.quizId = quizId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getExplication() {

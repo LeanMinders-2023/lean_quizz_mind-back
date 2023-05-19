@@ -18,9 +18,9 @@ import static org.mockito.Mockito.*;
 
 /*
  *   void save(Question question)                             ->      save into database
- *   void save(Question existingQuestion)                     ->      don`t save into database
- *   List<Answer> getAll(UUID questionId)                     ->      return a PossibleAnswer list object  with the possible answers
- *   void save(Question question) with empty List<Answer>     ->      don`t save into database
+ *   void save(Question existingQuestion)                     ->      don`t save into database and send DATA_ALREADY_EXISTS warning
+ *   List<Answer> getAll(UUID questionId)                     ->      [possibleAnswer1, possibleAnswer2...]
+ *   void save(Question question) with empty List<Answer>     ->      don`t save into database and send ANSWER_LIST_CANNOT_BE_EMPTY warning
  */
 class QuestionServiceTest {
     private final QuestionRepository MOCK_QUESTION_REPOSITORY = mock(PostgreSQLQuestionRepositoryAdapter.class);

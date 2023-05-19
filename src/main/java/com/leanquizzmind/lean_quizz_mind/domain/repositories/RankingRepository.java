@@ -6,6 +6,8 @@ public interface RankingRepository {
 
     void save(Ranking ranking);
 
+    // getRankingByQuizIdLimit10(UUID quizId)
+
     int getPositionBy(String nickname);
 
 }

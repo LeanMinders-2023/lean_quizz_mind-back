@@ -34,11 +34,11 @@ public class Category {
         this.category = category;
     }
 
-    public List<Quiz> getQuizzList() {
+    public List<Quiz> getQuizList() {
         return quizList;
     }
 
-    public void setQuizzList(List<Quiz> quizList) {
+    public void setQuizList(List<Quiz> quizList) {
         this.quizList = quizList;
     }
 

@@ -14,8 +14,8 @@ import static org.mockito.Mockito.*;
 
 /*
  *   save(Answer answer)         ->      save into the database
- *   save(Answer answerExist)    ->      don`t save into the database
- *   if answer text is empty     ->      don`t save into the database
+ *   save(Answer answerExist)    ->      don`t save into the database and send DATA_ALREADY_EXISTS warning
+ *   if answer text is empty     ->      don`t save into the database and send STATEMENT_CANNOT_BE_EMPTY warning
  */
 
 class AnswerServiceTest {

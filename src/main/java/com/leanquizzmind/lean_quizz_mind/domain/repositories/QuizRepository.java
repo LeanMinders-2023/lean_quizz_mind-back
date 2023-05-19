@@ -13,6 +13,6 @@ public interface QuizRepository {
 
     List<Question> getAllQuestions(UUID quiz);
 
-    Ranking getRankingBy(UUID quizId);
+    Quiz getQuizBy(UUID quizId);
 
 }
