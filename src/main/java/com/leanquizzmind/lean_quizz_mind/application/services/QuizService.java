@@ -27,7 +27,11 @@ public class QuizService {
     }
 
     public Either<QuizWarnings, Quiz> getQuizById(UUID quizId) {
+
         Quiz quiz = quizRepository.getQuizBy(quizId);
+        if (quiz == null) {
+            return Either.left(QuizWarnings.CANNOT_GET_QUIZ_THAT_NOT_EXISTS);
+        }
         return Either.right(quiz);
     }
 
