@@ -13,6 +13,11 @@ public class QuizService {
 
     public Either<QuizWarnings, Quiz> save(Quiz quiz) {
 
+        if (quiz.getQuizId() != null) {
+            return Either.left(QuizWarnings.QUIZ_ALREADY_EXISTS);
+        }
+
+        quiz.insertId();
         quizRepository.save(quiz);
         return Either.right(quiz);
     }
