@@ -10,6 +10,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.Time;
 import java.util.List;
+import java.util.UUID;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -18,7 +19,7 @@ import static org.junit.jupiter.api.Assertions.*;
  *   Either<QuizWarning, Quiz> save(Quiz quiz)                       ->      insert quiz into database
  *   Either<QuizWarning, Quiz> save(Quiz existingQuiz)               ->      don`t add into database and send warning
  *   Either<QuizWarning, Quiz> getQuizBy(UUID quizId)                ->      Quiz object with data
- *   Either<QuizWarning, Quiz> getQuizBy(UUID quizIdThatExists)      ->      null response with CANNOT_GET_QUIZ_WITH_THAT_ID warning
+ *   Either<QuizWarning, Quiz> getQuizBy(UUID quizIdThatExists)      ->      null response with CANNOT_GET_QUIZ_THAT_NOT_EXISTS warning
  *   List<Question> getAllQuestion()                                 ->      [question1, question2...]
  *   List<Quiz> getAllByContainingTitle(String title)                ->      [quiz1, quiz2...]
  */
@@ -63,6 +64,17 @@ class QuizServiceTest {
 
         verify(mockQuizRepository, never()).save(quiz);
         assertEquals(possibleQuiz.getLeft(), QuizWarnings.QUIZ_ALREADY_EXISTS);
+    }
+
+    @Test
+    void should_get_a_quiz_by_id() {
+        Quiz quiz = new Quiz("title example", "explication example", Difficulty.EASY, questions, ranking);
+        quiz.insertId();
+
+        when(mockQuizRepository.getQuizBy(quiz.getQuizId())).thenReturn(quiz);
+        Either<QuizWarnings, Quiz> possibleQuiz = quizService.getQuizById(quiz.getQuizId());
+
+        assertEquals(possibleQuiz.get(), quiz);
     }
 
 }
