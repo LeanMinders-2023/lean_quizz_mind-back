@@ -1,6 +1,5 @@
 package com.leanquizzmind.lean_quizz_mind.infraestructure.repositories;
 
-import com.leanquizzmind.lean_quizz_mind.domain.models.Question;
 import com.leanquizzmind.lean_quizz_mind.domain.models.Quiz;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.QuizRepository;
 
@@ -17,11 +16,6 @@ public class PostgresSQLQuizRepositoryAdapter implements QuizRepository {
 
     @Override
     public void save(Quiz quiz) {
-        throw new Error("Not implemented yet");
-    }
-
-    @Override
-    public List<Question> getAllQuestions(UUID quiz) {
         throw new Error("Not implemented yet");
     }
 

@@ -11,8 +11,6 @@ public interface QuizRepository {
 
     void save(Quiz quiz);
 
-    List<Question> getAllQuestions(UUID quiz);
-
     Quiz getQuizBy(UUID quizId);
 
     List<Quiz> getAllByContainingTitle(String title);

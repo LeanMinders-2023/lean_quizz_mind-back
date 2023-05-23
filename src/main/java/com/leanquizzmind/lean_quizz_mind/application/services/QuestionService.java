@@ -1,6 +1,6 @@
 package com.leanquizzmind.lean_quizz_mind.application.services;
 
-import com.leanquizzmind.lean_quizz_mind.application.warnings.QuestionWarnings;
+import com.leanquizzmind.lean_quizz_mind.application.errors.QuestionErrors;
 import com.leanquizzmind.lean_quizz_mind.domain.models.Answer;
 import com.leanquizzmind.lean_quizz_mind.domain.models.Question;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.QuestionRepository;
@@ -21,9 +21,9 @@ public class QuestionService {
         return QUESTION_REPOSITORY.getAll(questionId);
     }
 
-    public Either<QuestionWarnings, Question> save(Question question) {
+    public Either<QuestionErrors, Question> save(Question question) {
 
-        Either<QuestionWarnings, Question> validateQuestion = getWarningQuestionEither(question);
+        Either<QuestionErrors, Question> validateQuestion = getWarningQuestionEither(question);
         if (validateQuestion != null) {
             return validateQuestion;
         }
@@ -33,24 +33,24 @@ public class QuestionService {
         return null;
     }
 
-    private  Either<QuestionWarnings, Question> getWarningQuestionEither(Question question) {
+    private  Either<QuestionErrors, Question> getWarningQuestionEither(Question question) {
 
         UUID questionId = question.getQuestionId();
         List<Answer> answers = question.getAnswers();
         boolean questionExists = questionId != null;
         if (questionExists) {
-            return Either.left(QuestionWarnings.DATA_ALREADY_EXISTS);
+            return Either.left(QuestionErrors.DATA_ALREADY_EXISTS);
         }
 
         boolean possibleAnswerListIsEmpty = answers.isEmpty();
         if (possibleAnswerListIsEmpty) {
-            return Either.left(QuestionWarnings.ANSWER_LIST_CANNOT_BE_EMPTY);
+            return Either.left(QuestionErrors.ANSWER_LIST_CANNOT_BE_EMPTY);
         }
 
         int numberOfCorrectAnswer = Math.toIntExact(answers.stream().filter(Answer::getCorrectAnswer).count());
         boolean areNotOnlyOneCorrectAnswer = numberOfCorrectAnswer != 1;
         if (areNotOnlyOneCorrectAnswer) {
-            return Either.left(QuestionWarnings.ONLY_ONE_CORRECT_ANSWER_REQUIRED);
+            return Either.left(QuestionErrors.ONLY_ONE_CORRECT_ANSWER_REQUIRED);
         }
         return null;
     }

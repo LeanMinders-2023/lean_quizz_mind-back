@@ -1,11 +1,12 @@
 package com.leanquizzmind.lean_quizz_mind.application.services;
 
-import com.leanquizzmind.lean_quizz_mind.application.warnings.QuizWarnings;
+import com.leanquizzmind.lean_quizz_mind.application.errors.QuizErrors;
 import com.leanquizzmind.lean_quizz_mind.domain.models.Quiz;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.QuizRepository;
 import io.vavr.control.Either;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class QuizService {
@@ -14,24 +15,24 @@ public class QuizService {
         this.quizRepository = quizRepository;
     }
 
-    public Either<QuizWarnings, Quiz> save(Quiz quiz) {
+    public Optional<QuizErrors> save(Quiz quiz) {
 
         boolean quizExistsInDatabase = quiz.getQuizId() != null;
 
         if (quizExistsInDatabase) {
-            return Either.left(QuizWarnings.QUIZ_ALREADY_EXISTS);
+            return Optional.of(QuizErrors.QUIZ_ALREADY_EXISTS);
         }
 
         quiz.insertId();
         quizRepository.save(quiz);
-        return Either.right(quiz);
+        return Optional.empty();
     }
 
-    public Either<QuizWarnings, Quiz> getQuizById(UUID quizId) {
+    public Either<QuizErrors, Quiz> getQuizById(UUID quizId) {
 
         Quiz quiz = quizRepository.getQuizBy(quizId);
         if (quiz == null) {
-            return Either.left(QuizWarnings.CANNOT_GET_QUIZ_THAT_NOT_EXISTS);
+            return Either.left(QuizErrors.CANNOT_GET_QUIZ_THAT_NOT_EXISTS);
         }
         return Either.right(quiz);
     }

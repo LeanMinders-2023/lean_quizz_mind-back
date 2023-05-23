@@ -1,6 +1,6 @@
 package com.leanquizzmind.lean_quizz_mind.application.services;
 
-import com.leanquizzmind.lean_quizz_mind.application.warnings.QuestionWarnings;
+import com.leanquizzmind.lean_quizz_mind.application.errors.QuestionErrors;
 import com.leanquizzmind.lean_quizz_mind.domain.models.Answer;
 import com.leanquizzmind.lean_quizz_mind.domain.models.Question;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.QuestionRepository;
@@ -37,7 +37,7 @@ class QuestionServiceTest {
     void should_save_a_new_question() {
         Question question = new Question(QUESTION_TEXT, possibleAnswers);
 
-        Either<QuestionWarnings, Question> possibleQuestion = QUESTION_SERVICE.save(question);
+        Either<QuestionErrors, Question> possibleQuestion = QUESTION_SERVICE.save(question);
 
         verify(MOCK_QUESTION_REPOSITORY).save(question);
         assertNull(possibleQuestion);
@@ -47,10 +47,10 @@ class QuestionServiceTest {
         Question question = new Question(QUESTION_TEXT, possibleAnswers);
         question.insertId();
 
-        Either<QuestionWarnings, Question> possibleQuestion = QUESTION_SERVICE.save(question);
+        Either<QuestionErrors, Question> possibleQuestion = QUESTION_SERVICE.save(question);
 
         verify(MOCK_QUESTION_REPOSITORY, never()).save(question);
-        assertEquals(possibleQuestion.getLeft(), QuestionWarnings.DATA_ALREADY_EXISTS);
+        assertEquals(possibleQuestion.getLeft(), QuestionErrors.DATA_ALREADY_EXISTS);
     }
 
     @Test
@@ -67,10 +67,10 @@ class QuestionServiceTest {
     void should_not_save_question_if_have_a_empty_answer_list() {
         Question question = new Question(QUESTION_TEXT, List.of());
 
-        Either<QuestionWarnings, Question> possibleQuestion = QUESTION_SERVICE.save(question);
+        Either<QuestionErrors, Question> possibleQuestion = QUESTION_SERVICE.save(question);
 
         verify(MOCK_QUESTION_REPOSITORY, never()).save(question);
-        assertEquals(possibleQuestion.getLeft(), QuestionWarnings.ANSWER_LIST_CANNOT_BE_EMPTY);
+        assertEquals(possibleQuestion.getLeft(), QuestionErrors.ANSWER_LIST_CANNOT_BE_EMPTY);
     }
 
 }

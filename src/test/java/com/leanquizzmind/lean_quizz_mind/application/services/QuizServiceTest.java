@@ -1,6 +1,6 @@
 package com.leanquizzmind.lean_quizz_mind.application.services;
 
-import com.leanquizzmind.lean_quizz_mind.application.warnings.QuizWarnings;
+import com.leanquizzmind.lean_quizz_mind.application.errors.QuizErrors;
 import com.leanquizzmind.lean_quizz_mind.domain.models.*;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.QuizRepository;
 import com.leanquizzmind.lean_quizz_mind.infraestructure.repositories.PostgresSQLQuizRepositoryAdapter;
@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 
 import java.sql.Time;
 import java.util.List;
+import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
@@ -49,20 +50,21 @@ class QuizServiceTest {
 
         @Test
         void should_save_quiz_into_database() {
-            Either<QuizWarnings, Quiz> possibleQuiz = quizService.save(quiz);
+            Optional<QuizErrors> possibleWarning = quizService.save(quiz);
 
             verify(mockQuizRepository).save(quiz);
-            assertEquals(possibleQuiz.get(), quiz);
+            assertFalse(possibleWarning.isPresent());
         }
 
         @Test
         void should_save_existing_quiz_into_database() {
             quiz.insertId();
 
-            Either<QuizWarnings, Quiz> possibleQuiz = quizService.save(quiz);
+            Optional<QuizErrors> possibleWarning = quizService.save(quiz);
 
             verify(mockQuizRepository, never()).save(quiz);
-            assertEquals(possibleQuiz.getLeft(), QuizWarnings.QUIZ_ALREADY_EXISTS);
+            assertTrue(possibleWarning.isPresent());
+            assertEquals(possibleWarning.get(), QuizErrors.QUIZ_ALREADY_EXISTS);
         }
 
     }
@@ -81,7 +83,7 @@ class QuizServiceTest {
         @Test
         void should_get_a_quiz_by_id() {
             when(mockQuizRepository.getQuizBy(quiz.getQuizId())).thenReturn(quiz);
-            Either<QuizWarnings, Quiz> possibleQuiz = quizService.getQuizById(quiz.getQuizId());
+            Either<QuizErrors, Quiz> possibleQuiz = quizService.getQuizById(quiz.getQuizId());
 
             assertEquals(possibleQuiz.get(), quiz);
         }
@@ -89,9 +91,9 @@ class QuizServiceTest {
         @Test
         void should_get_a_quiz_by_id_that_not_exists_in_database() {
             when(mockQuizRepository.getQuizBy(quiz.getQuizId())).thenReturn(null);
-            Either<QuizWarnings, Quiz> possibleQuiz = quizService.getQuizById(quiz.getQuizId());
+            Either<QuizErrors, Quiz> possibleQuiz = quizService.getQuizById(quiz.getQuizId());
 
-            assertEquals(possibleQuiz.getLeft(), QuizWarnings.CANNOT_GET_QUIZ_THAT_NOT_EXISTS);
+            assertEquals(possibleQuiz.getLeft(), QuizErrors.CANNOT_GET_QUIZ_THAT_NOT_EXISTS);
         }
 
     }
