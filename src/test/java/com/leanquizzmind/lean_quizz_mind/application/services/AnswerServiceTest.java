@@ -9,6 +9,8 @@ import com.leanquizzmind.lean_quizz_mind.infraestructure.repositories.PostgresSQ
 import io.vavr.control.Either;
 import org.junit.jupiter.api.Test;
 
+import java.util.Optional;
+
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
@@ -27,30 +29,32 @@ class AnswerServiceTest {
     void should_save_a_new_answer() {
         Answer answer = new Answer(ANSWER_TEXT, false);
 
-        Either<AnswerErrors, Answer> possibleAnswer = ANSWER_SERVICE.save(answer);
+        Optional<AnswerErrors> possibleAnswer = ANSWER_SERVICE.save(answer);
 
         verify(MOCK_ANSWER_REPOSITORY).save(answer);
-        assertNull(possibleAnswer);
+        assertFalse(possibleAnswer.isPresent());
     }
     @Test
     void should_not_save_answer_if_exists() {
         Answer answer = new Answer(ANSWER_TEXT, false);
         answer.insertId();
 
-        Either<AnswerErrors, Answer> possibleAnswer = ANSWER_SERVICE.save(answer);
+        Optional<AnswerErrors> possibleAnswer = ANSWER_SERVICE.save(answer);
 
         verify(MOCK_ANSWER_REPOSITORY, never()).save(answer);
-        assertEquals(possibleAnswer.getLeft(), AnswerErrors.DATA_ALREADY_EXISTS);
+        assertTrue(possibleAnswer.isPresent());
+        assertEquals(possibleAnswer.get(), AnswerErrors.DATA_ALREADY_EXISTS);
     }
 
     @Test
     void should_not_save_answer_if_statement_is_empty() {
         Answer answer = new Answer("", false);
 
-        Either<AnswerErrors, Answer> possibleAnswer = ANSWER_SERVICE.save(answer);
+        Optional<AnswerErrors> possibleAnswer = ANSWER_SERVICE.save(answer);
 
         verify(MOCK_ANSWER_REPOSITORY, never()).save(answer);
-        assertEquals(possibleAnswer.getLeft(), AnswerErrors.STATEMENT_CANNOT_BE_EMPTY);
+        assertTrue(possibleAnswer.isPresent());
+        assertEquals(possibleAnswer.get(), AnswerErrors.STATEMENT_CANNOT_BE_EMPTY);
     }
 
 }

@@ -12,6 +12,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 import static org.mockito.Mockito.*;
@@ -37,20 +38,22 @@ class QuestionServiceTest {
     void should_save_a_new_question() {
         Question question = new Question(QUESTION_TEXT, possibleAnswers);
 
-        Either<QuestionErrors, Question> possibleQuestion = QUESTION_SERVICE.save(question);
+        Optional<QuestionErrors> possibleQuestion = QUESTION_SERVICE.save(question);
 
         verify(MOCK_QUESTION_REPOSITORY).save(question);
-        assertNull(possibleQuestion);
+        assertFalse(possibleQuestion.isPresent());
     }
+
     @Test
     void should_not_save_an_existent_question() {
         Question question = new Question(QUESTION_TEXT, possibleAnswers);
         question.insertId();
 
-        Either<QuestionErrors, Question> possibleQuestion = QUESTION_SERVICE.save(question);
+        Optional<QuestionErrors> possibleQuestion = QUESTION_SERVICE.save(question);
 
         verify(MOCK_QUESTION_REPOSITORY, never()).save(question);
-        assertEquals(possibleQuestion.getLeft(), QuestionErrors.DATA_ALREADY_EXISTS);
+        assertTrue(possibleQuestion.isPresent());
+        assertEquals(possibleQuestion.get(), QuestionErrors.DATA_ALREADY_EXISTS);
     }
 
     @Test
@@ -67,10 +70,11 @@ class QuestionServiceTest {
     void should_not_save_question_if_have_a_empty_answer_list() {
         Question question = new Question(QUESTION_TEXT, List.of());
 
-        Either<QuestionErrors, Question> possibleQuestion = QUESTION_SERVICE.save(question);
+        Optional<QuestionErrors> possibleQuestion = QUESTION_SERVICE.save(question);
 
         verify(MOCK_QUESTION_REPOSITORY, never()).save(question);
-        assertEquals(possibleQuestion.getLeft(), QuestionErrors.ANSWER_LIST_CANNOT_BE_EMPTY);
+        assertTrue(possibleQuestion.isPresent());
+        assertEquals(possibleQuestion.get(), QuestionErrors.ANSWER_LIST_CANNOT_BE_EMPTY);
     }
 
 }

@@ -8,6 +8,7 @@ import io.vavr.control.Either;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 public class QuestionService {
@@ -21,37 +22,37 @@ public class QuestionService {
         return QUESTION_REPOSITORY.getAll(questionId);
     }
 
-    public Either<QuestionErrors, Question> save(Question question) {
+    public Optional<QuestionErrors> save(Question question) {
 
-        Either<QuestionErrors, Question> validateQuestion = getWarningQuestionEither(question);
-        if (validateQuestion != null) {
+        Optional<QuestionErrors> validateQuestion = getWarningQuestionEither(question);
+        if (validateQuestion.isPresent()) {
             return validateQuestion;
         }
 
         question.insertId();
         this.QUESTION_REPOSITORY.save(question);
-        return null;
+        return Optional.empty();
     }
 
-    private  Either<QuestionErrors, Question> getWarningQuestionEither(Question question) {
+    private  Optional<QuestionErrors> getWarningQuestionEither(Question question) {
 
         UUID questionId = question.getQuestionId();
         List<Answer> answers = question.getAnswers();
         boolean questionExists = questionId != null;
         if (questionExists) {
-            return Either.left(QuestionErrors.DATA_ALREADY_EXISTS);
+            return Optional.of(QuestionErrors.DATA_ALREADY_EXISTS);
         }
 
         boolean possibleAnswerListIsEmpty = answers.isEmpty();
         if (possibleAnswerListIsEmpty) {
-            return Either.left(QuestionErrors.ANSWER_LIST_CANNOT_BE_EMPTY);
+            return Optional.of(QuestionErrors.ANSWER_LIST_CANNOT_BE_EMPTY);
         }
 
         int numberOfCorrectAnswer = Math.toIntExact(answers.stream().filter(Answer::getCorrectAnswer).count());
         boolean areNotOnlyOneCorrectAnswer = numberOfCorrectAnswer != 1;
         if (areNotOnlyOneCorrectAnswer) {
-            return Either.left(QuestionErrors.ONLY_ONE_CORRECT_ANSWER_REQUIRED);
+            return Optional.of(QuestionErrors.ONLY_ONE_CORRECT_ANSWER_REQUIRED);
         }
-        return null;
+        return Optional.empty();
     }
 }

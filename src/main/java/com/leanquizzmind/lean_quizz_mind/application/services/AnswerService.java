@@ -3,8 +3,9 @@ package com.leanquizzmind.lean_quizz_mind.application.services;
 import com.leanquizzmind.lean_quizz_mind.application.errors.AnswerErrors;
 import com.leanquizzmind.lean_quizz_mind.domain.models.Answer;
 import com.leanquizzmind.lean_quizz_mind.domain.repositories.AnswerRepository;
-import io.vavr.control.Either;
 import org.springframework.stereotype.Component;
+
+import java.util.Optional;
 
 @Component
 public class AnswerService {
@@ -14,33 +15,29 @@ public class AnswerService {
         this.ANSWER_REPOSITORY = answerRepository;
     }
 
-    // Optional
-    public Either<AnswerErrors, Answer> save(Answer answer) {
+    public Optional<AnswerErrors> save(Answer answer) {
 
-        Either<AnswerErrors, Answer> validateAnswer = getWarningAnswerEither(answer);
-        if (validateAnswer != null) {
+        Optional<AnswerErrors> validateAnswer = getWarningAnswerEither(answer);
+        if (validateAnswer.isPresent()) {
             return validateAnswer;
         }
 
         answer.insertId();
         ANSWER_REPOSITORY.save(answer);
-        return null;
+        return Optional.empty();
     }
 
-    // Optional
-    private Either<AnswerErrors, Answer> getWarningAnswerEither(Answer answer) {
+    private Optional<AnswerErrors> getWarningAnswerEither(Answer answer) {
 
-        // método para comprobaciones en objeto de dominio
-        // tell dont ask
-        boolean answerStatementIsEmpty = answer.getAnswer().isEmpty();
+        boolean answerStatementIsEmpty = answer.isEmpty();
         if (answerStatementIsEmpty){
-            return Either.left(AnswerErrors.STATEMENT_CANNOT_BE_EMPTY);
+            return Optional.of(AnswerErrors.STATEMENT_CANNOT_BE_EMPTY);
         }
 
         if (answer.getAnswerId() != null) {
-            return Either.left(AnswerErrors.DATA_ALREADY_EXISTS);
+            return Optional.of(AnswerErrors.DATA_ALREADY_EXISTS);
         }
-        return null;
+        return Optional.empty();
     }
 
 }

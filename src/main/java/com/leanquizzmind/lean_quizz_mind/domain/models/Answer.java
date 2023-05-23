@@ -33,4 +33,9 @@ public class Answer {
     public void insertId() {
         this.answerId = UUID.randomUUID();
     }
+
+    public boolean isEmpty() {
+        return this.answer.isEmpty();
+    }
+
 }
