@@ -52,6 +52,9 @@ public class QuizEntity {
         this.ranking = ranking;
     }
 
+    public QuizEntity() {
+    }
+
     public UUID getQuizId() {
         return quizId;
     }

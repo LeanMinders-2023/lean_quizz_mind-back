@@ -7,24 +7,24 @@ import java.util.UUID;
 public class Quiz {
     private UUID quizId;
     private String title;
-    private String explication;
+    private String description;
     private Difficulty difficulty;
     private List<Question> questions;
     private Ranking ranking;
     public Quiz() {}
 
-    public Quiz(UUID quizId, String title, String explication, Difficulty difficulty, List<Question> questions, Ranking ranking) {
+    public Quiz(UUID quizId, String title, String description, Difficulty difficulty, List<Question> questions, Ranking ranking) {
         this.quizId = quizId;
         this.title = title;
-        this.explication = explication;
+        this.description = description;
         this.difficulty = difficulty;
         this.questions = questions;
         this.ranking = ranking;
     }
 
-    public Quiz(String title, String explication, Difficulty difficulty, List<Question> questions, Ranking ranking) {
+    public Quiz(String title, String description, Difficulty difficulty, List<Question> questions, Ranking ranking) {
         this.title = title;
-        this.explication = explication;
+        this.description = description;
         this.difficulty = difficulty;
         this.questions = questions;
         this.ranking = ranking;
@@ -46,12 +46,12 @@ public class Quiz {
         this.title = title;
     }
 
-    public String getExplication() {
-        return explication;
+    public String getDescription() {
+        return description;
     }
 
-    public void setExplication(String explication) {
-        this.explication = explication;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public Difficulty getDifficulty() {

@@ -58,7 +58,7 @@ public class AnswerEntity {
         return new AnswerEntity(
                 answer.getAnswerId(),
                 answer.getAnswer(),
-                answer.getCorrectAnswer()
+                answer.getCorrect()
         );
 
     }

@@ -5,13 +5,10 @@ import com.leanquizzmind.lean_quizz_mind.domain.repositories.RankingRepository;
 
 
 public class RankingService {
-
     private final RankingRepository rankingRepository;
-
     public RankingService(RankingRepository rankingRepository) {
         this.rankingRepository = rankingRepository;
     }
-
     public void save(Ranking ranking) {
         ranking.insertId();
         rankingRepository.save(ranking);
@@ -19,5 +16,4 @@ public class RankingService {
     public int getPositionBy(String nickname) {
         return rankingRepository.getPositionBy(nickname);
     }
-
 }

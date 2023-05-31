@@ -15,7 +15,6 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
-
 /*
  *   Either<QuizWarning, Quiz> save(Quiz quiz)                       ->      insert quiz into database
  *   Either<QuizWarning, Quiz> save(Quiz existingQuiz)               ->      don`t add into database and send warning
@@ -23,31 +22,25 @@ import static org.junit.jupiter.api.Assertions.*;
  *   Either<QuizWarning, Quiz> getQuizBy(UUID quizIdThatExists)      ->      null response with CANNOT_GET_QUIZ_THAT_NOT_EXISTS warning
  *   List<Quiz> getAllByContainingTitle(String title)                ->      [quiz1, quiz2...]
  */
-
 class QuizServiceTest {
-
     private final QuizRepository mockQuizRepository = mock(PostgresSQLQuizRepositoryAdapter.class);
     private final QuizService quizService = new QuizService(mockQuizRepository);
     private final Answer firstAnswer = new Answer("My new answer", true);
     private final Answer secondAnswer = new Answer("My new answer", false);
     private final List<Answer> answers = List.of(firstAnswer, secondAnswer);
     private final List<Question> questions = List.of(
-            new Question("example", answers),
+                new Question("example", answers),
                 new Question("example", answers),
                 new Question("example", answers)
                 );
     private final Ranking ranking = new Ranking("fernando", (float) 5.65, new Time(0,2,35));
-
     @Nested
     class saveQuizTest {
-
         private Quiz quiz;
-
         @BeforeEach
         void setUp() {
             quiz = new Quiz("title example", "explication example", Difficulty.EASY, questions, ranking);
         }
-
         @Test
         void should_save_quiz_into_database() {
             Optional<QuizErrors> possibleWarning = quizService.save(quiz);
@@ -55,9 +48,8 @@ class QuizServiceTest {
             verify(mockQuizRepository).save(quiz);
             assertFalse(possibleWarning.isPresent());
         }
-
         @Test
-        void should_save_existing_quiz_into_database() {
+        void should_not_save_existing_quiz_into_database() {
             quiz.insertId();
 
             Optional<QuizErrors> possibleWarning = quizService.save(quiz);
@@ -66,20 +58,15 @@ class QuizServiceTest {
             assertTrue(possibleWarning.isPresent());
             assertEquals(possibleWarning.get(), QuizErrors.QUIZ_ALREADY_EXISTS);
         }
-
     }
-
     @Nested
     class getQuizByIdTest {
-
         private Quiz quiz;
-
         @BeforeEach
         void setUp() {
             quiz = new Quiz("title example", "explication example", Difficulty.EASY, questions, ranking);
             quiz.insertId();
         }
-
         @Test
         void should_get_a_quiz_by_id() {
             when(mockQuizRepository.getQuizBy(quiz.getQuizId())).thenReturn(quiz);
@@ -97,10 +84,8 @@ class QuizServiceTest {
         }
 
     }
-
     @Nested
     class getAllByContainingTitleTest {
-
         private final String firstTitle = "testing in python";
         private final String secondTitle = "testing in java";
         private final Quiz firstQuiz = new Quiz(firstTitle, "explication example", Difficulty.EASY, questions, ranking);
@@ -114,7 +99,5 @@ class QuizServiceTest {
 
             assertEquals(quizList, quizzes);
         }
-
     }
-
 }
